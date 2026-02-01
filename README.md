@@ -1,502 +1,514 @@
-# AI-Assisted Development Mastery Guide
+# Developer Tools & Workflows Mastery
 
-**Complete learning resource for AI-powered development workflows**
+**Comprehensive learning resources for modern development tools and AI-powered workflows**
 
-This comprehensive guide covers AI-assisted development using Claude Code and other AI coding tools, focusing on practical workflows, best practices, and optimization strategies for modern software development.
+This repository contains structured, beginner-friendly guides to master essential development tools that will transform your coding workflow. Whether you're looking to leverage AI assistance or become a Neovim power user, you'll find complete learning paths here.
 
 ---
 
-## 📋 What This Guide Covers
+## 📚 What's Inside
 
-### Core Focus Areas
+### 🤖 [Claude Code - AI-Assisted Development](claude-code/)
 
-1. **Claude Code CLI** - Anthropic's official command-line tool
-2. **AI-Assisted Development Patterns** - Universal workflows applicable across tools
-3. **MERN Stack Development** - React, Next.js, Node.js, TypeScript, PostgreSQL
-4. **AI/ML Projects** - Machine learning integration and workflows
-5. **Token Optimization** - Cost reduction strategies (30-50% savings)
-6. **Professional Workflows** - Industry-standard development patterns
-7. **Team Collaboration** - Scaling AI tools across organizations
+**Complete mastery guide for AI-powered development workflows**
 
-### Tools & Technologies Covered
+Learn to use Claude Code CLI and AI coding assistants effectively, with proven strategies for:
+- AI-assisted development patterns and best practices
+- Token optimization (reduce costs by 30-50%)
+- MERN stack workflows (React, Next.js, Node.js, TypeScript)
+- Team collaboration and enterprise scaling
+- Model Context Protocol (MCP) integration
 
-**Primary:**
-- Claude Code CLI (Anthropic)
-- Claude API integration
-- Model Context Protocol (MCP) servers
+**Time Investment:** 2-15 hours (depending on learning path)
+**Skill Level:** Beginner to Expert
+**Stack Focus:** JavaScript/TypeScript, React, Node.js, PostgreSQL
 
-**Development Stack:**
-- React / Next.js 14
-- Node.js / Express
-- TypeScript
-- PostgreSQL / Prisma
-- Python / FastAPI (for ML)
+👉 **[Start Learning Claude Code →](claude-code/README.md)**
 
-**DevOps & Tools:**
-- Git workflows
-- GitHub CLI
-- CI/CD integration
-- Testing frameworks
-- Code review processes
+---
+
+### ⌨️ [Neovim - Text Editor Mastery](neovim/)
+
+**From zero to hero: Master Neovim step-by-step**
+
+A structured, visual guide to learning Neovim from the ground up with:
+- Clear explanations with visual diagrams
+- Progressive difficulty with practice exercises
+- Real-world coding workflows
+- LSP integration for IDE-like features
+- Customization and configuration guidance
+
+**Time Investment:** 2-4 weeks (30 min/day)
+**Skill Level:** Complete beginner to Advanced
+**Focus:** Modal editing, efficient navigation, developer productivity
+
+👉 **[Start Learning Neovim →](neovim/README.md)**
 
 ---
 
 ## 🎯 Who This Is For
 
-### Target Audience
+### You Should Use This Repository If You Want To:
 
-✅ **Software Engineers** learning AI-assisted development
-✅ **MERN Stack Developers** wanting to leverage AI tools
-✅ **AI/ML Engineers** integrating models into applications
-✅ **Team Leads** scaling AI tools across teams
-✅ **DevOps Engineers** automating with AI
-✅ **Students** learning modern development practices
+✅ **Master AI-assisted development** with Claude Code or similar tools
+✅ **Become proficient with Neovim** for faster, keyboard-driven editing
+✅ **Optimize your development workflow** for maximum productivity
+✅ **Reduce AI API costs** while improving code quality
+✅ **Learn modern development practices** with step-by-step guidance
+✅ **Build real-world projects** with proven workflows
 
-### Prerequisites
+### Target Audience:
 
-- Basic command-line knowledge
-- Git fundamentals
-- Programming experience (any language)
-- Familiarity with web development (for MERN sections)
-
-**No prior AI tool experience needed!**
+- Software engineers learning modern development tools
+- MERN stack developers wanting AI integration
+- Developers transitioning to Neovim from other editors
+- Team leads scaling AI tools across organizations
+- Students learning professional development workflows
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start Guides
 
-**Already have Claude Code installed?**
+### Getting Started with Claude Code (15 minutes)
 
 ```bash
+# Navigate to Claude Code guide
 cd claude-code/00-prerequisites
+
+# Follow the installation guide
+cat installation-guide.md
+
+# Start your first AI-assisted session
 cat first-steps.md
 ```
 
-**New to AI-assisted development?**
+**What you'll learn:**
+- Install and configure Claude Code CLI
+- Your first AI-assisted coding session
+- Basic commands and workflow patterns
 
-Start with [00-prerequisites/installation-guide.md](00-prerequisites/installation-guide.md)
-
----
-
-## 🎯 Learning Paths
-
-### Path 1: Rapid Essentials (2-3 hours)
-**For developers who want to start coding with AI quickly**
-
-1. ✅ [Installation Guide](00-prerequisites/installation-guide.md) (15 min)
-2. ✅ [First Steps](00-prerequisites/first-steps.md) (30 min)
-3. ✅ [Basic Commands](01-fundamentals/basic-commands.md) (30 min)
-4. ✅ [File Operations](01-fundamentals/file-operations.md) (30 min)
-5. ✅ [Token Management](02-optimization/token-management.md) (30 min)
-6. ✅ [MERN Stack Workflow](06-real-world/mern-stack-workflow.md) (30 min)
-
-**After this path:** You can use AI tools productively for daily development
+**[Full Claude Code Guide →](claude-code/README.md)**
 
 ---
 
-### Path 2: Professional Mastery (6-8 hours)
-**For developers who want to unlock full potential**
-
-**Foundation (1.5 hours)**
-1. Complete [Path 1](#path-1-rapid-essentials-2-3-hours) above
-2. [Conversation Patterns](01-fundamentals/conversation-patterns.md) (30 min)
-3. [Git Workflows](01-fundamentals/git-workflows.md) (30 min)
-
-**Optimization (2 hours)**
-4. [Context Efficiency](02-optimization/context-efficiency.md) (30 min)
-5. [Folder Structure Best Practices](02-optimization/folder-structure-best-practices.md) (45 min)
-6. [Memory System Guide](02-optimization/claude-md-guide.md) (45 min)
-
-**Intermediate Skills (2 hours)**
-7. [Subagents & Delegation](03-intermediate/subagents-explained.md) (45 min)
-8. [Custom Commands](03-intermediate/custom-commands.md) (30 min)
-9. [Workflow Patterns](03-intermediate/workflow-patterns.md) (45 min)
-
-**Advanced Features (2 hours)**
-10. [MCP Servers](04-advanced/mcp-servers-setup.md) (45 min)
-11. [Hooks & Automation](04-advanced/hooks-and-automation.md) (45 min)
-12. [Real-World Patterns](06-real-world/debugging-strategies.md) (30 min)
-
-**After this path:** You're an expert with optimized workflows
-
----
-
-### Path 3: Enterprise Expert (12+ hours)
-**For teams and power users who want everything**
-
-Complete all chapters sequentially, including:
-- All hidden features and power-user tricks
-- Multi-agent orchestration
-- Enterprise patterns
-- Complete template library
-- Advanced troubleshooting
-
----
-
-## ✓ Prerequisites Checklist
-
-Before starting, ensure you have:
-
-- [ ] Terminal access (bash, zsh, or fish)
-- [ ] Basic command-line knowledge
-- [ ] Git installed and configured
-- [ ] Node.js 18+ (for JavaScript/TypeScript examples)
-- [ ] Text editor (VS Code, Vim, etc.)
-- [ ] Anthropic API key ([get one here](https://console.anthropic.com/))
-- [ ] Internet connection
-- [ ] 2GB+ free disk space
-
-**Optional but recommended:**
-- [ ] Docker (for containerization examples)
-- [ ] PostgreSQL (for database examples)
-- [ ] Python 3.11+ (for ML examples)
-- [ ] Familiarity with TypeScript/React
-
----
-
-## 📚 Chapter Overview
-
-### 🟢 00-prerequisites/ (30 minutes)
-**Start here if new to AI-assisted development**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [installation-guide.md](00-prerequisites/installation-guide.md) | Install Claude Code CLI | 15 min | Claude Code |
-| [environment-setup.md](00-prerequisites/environment-setup.md) | Configure development environment | 10 min | Universal |
-| [first-steps.md](00-prerequisites/first-steps.md) | Your first AI-assisted session | 5 min | Claude Code |
-
-**Learn:** Installation, API setup, first commands
-
----
-
-### 🟢 01-fundamentals/ (2 hours)
-**Essential skills for AI-assisted development**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [basic-commands.md](01-fundamentals/basic-commands.md) | Core CLI commands | 30 min | Claude Code |
-| [conversation-patterns.md](01-fundamentals/conversation-patterns.md) | Effective AI communication | 30 min | Universal |
-| [file-operations.md](01-fundamentals/file-operations.md) | AI-assisted file management | 30 min | Universal |
-| [git-workflows.md](01-fundamentals/git-workflows.md) | AI + Git integration | 30 min | Universal |
-
-**Learn:** Communication patterns, prompting strategies, version control
-
----
-
-### 🟡 02-optimization/ (2.5 hours)
-**Reduce costs by 30-50%, maximize efficiency**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [token-management.md](02-optimization/token-management.md) | Token/cost optimization | 30 min | Universal (AI APIs) |
-| [context-efficiency.md](02-optimization/context-efficiency.md) | Context window strategies | 45 min | Claude, GPT, etc. |
-| [folder-structure-best-practices.md](02-optimization/folder-structure-best-practices.md) | AI-friendly project structure | 45 min | Universal |
-| [claude-md-guide.md](02-optimization/claude-md-guide.md) | Persistent memory systems | 30 min | Claude Code + adaptable |
-
-**Learn:** Cost optimization, project organization, memory management
-
----
-
-### 🟡 03-intermediate/ (2.5 hours)
-**Level up your AI workflow**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [subagents-explained.md](03-intermediate/subagents-explained.md) | Task delegation patterns | 45 min | Claude Code + concepts universal |
-| [custom-commands.md](03-intermediate/custom-commands.md) | Workflow automation | 30 min | Claude Code + adaptable |
-| [slash-commands.md](03-intermediate/slash-commands.md) | Built-in command reference | 30 min | Claude Code |
-| [workflow-patterns.md](03-intermediate/workflow-patterns.md) | Professional dev patterns | 45 min | Universal |
-
-**Learn:** Automation, delegation, proven workflows
-
----
-
-### 🔴 04-advanced/ (3 hours)
-**Enterprise-grade AI integration**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [mcp-servers-setup.md](04-advanced/mcp-servers-setup.md) | External tool integration | 45 min | MCP Protocol (multi-tool) |
-| [multi-agent-orchestration.md](04-advanced/multi-agent-orchestration.md) | Coordinate multiple AI agents | 45 min | Universal concepts |
-| [hooks-and-automation.md](04-advanced/hooks-and-automation.md) | Automated workflows | 45 min | Claude Code + adaptable |
-| [enterprise-patterns.md](04-advanced/enterprise-patterns.md) | Team/org scaling | 45 min | Universal |
-
-**Learn:** Integration, orchestration, team collaboration
-
----
-
-### 🔴 05-hidden-features/ (1.5 hours)
-**Power-user capabilities**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [extended-thinking.md](05-hidden-features/extended-thinking.md) | Deep reasoning modes | 30 min | Claude models |
-| [advanced-flags.md](05-hidden-features/advanced-flags.md) | CLI power-user options | 30 min | Claude Code |
-| [power-user-tricks.md](05-hidden-features/power-user-tricks.md) | Hidden shortcuts | 30 min | Claude Code + general tips |
-
-**Learn:** Advanced features, hidden capabilities, optimization tricks
-
----
-
-### 🟡 06-real-world/ (2.5 hours)
-**Practical examples for your tech stack**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [mern-stack-workflow.md](06-real-world/mern-stack-workflow.md) | React/Next.js/Node patterns | 45 min | Universal (any AI tool) |
-| [ai-ml-projects.md](06-real-world/ai-ml-projects.md) | ML integration workflows | 45 min | Universal |
-| [debugging-strategies.md](06-real-world/debugging-strategies.md) | AI-assisted debugging | 30 min | Universal |
-| [code-review-patterns.md](06-real-world/code-review-patterns.md) | AI code review workflows | 30 min | Universal |
-
-**Learn:** Real workflows for MERN, AI/ML, debugging, code review
-
----
-
-### 📦 07-templates/ (30 minutes)
-**Ready-to-use configurations**
-
-| Directory | Contents | Time | Applies To |
-|-----------|----------|------|------------|
-| [claude-md-templates/](07-templates/claude-md-templates/) | Project memory templates | 10 min | Claude Code + adaptable |
-| [subagent-templates/](07-templates/subagent-templates/) | Pre-built agent configs | 10 min | Claude Code + concepts universal |
-| [command-templates/](07-templates/command-templates/) | Common automation commands | 5 min | Claude Code + adaptable |
-| [mcp-configs/](07-templates/mcp-configs/) | MCP server configurations | 5 min | MCP Protocol |
-
-**Get:** Copy-paste templates for immediate use
-
----
-
-### 🔧 08-troubleshooting/ (1 hour)
-**Solve common problems**
-
-| File | Topic | Time | Applies To |
-|------|-------|------|------------|
-| [common-issues.md](08-troubleshooting/common-issues.md) | FAQ and fixes | 30 min | Claude Code + general AI tools |
-| [performance-optimization.md](08-troubleshooting/performance-optimization.md) | Speed optimization | 20 min | Universal |
-| [faq.md](08-troubleshooting/faq.md) | Frequently asked questions | 10 min | Claude Code + general |
-
-**Learn:** Troubleshooting, performance tuning, common issues
-
----
-
-## 🎴 Universal Quick Reference
-
-### AI-Assisted Development Principles
-
-**Effective Communication:**
-```
-Be specific, provide context, iterate
-Works with: Claude, GPT, Gemini, all AI assistants
-```
-
-**Token Optimization:**
-```
-Load files strategically, batch questions, use search before read
-Works with: Any token-based AI API
-```
-
-**Project Organization:**
-```
-Clear structure, consistent naming, feature-based layout
-Works with: All AI coding tools
-```
-
-**Workflow Patterns:**
-```
-Plan → Implement → Test → Review
-Works with: Universal software development
-```
-
-### Claude Code Specific
+### Getting Started with Neovim (5 minutes)
 
 ```bash
-# Essential Commands
-claude                  # Interactive session
-claude -p "query"      # One-shot query
-claude -c              # Continue last conversation
+# Navigate to Neovim guide
+cd neovim
 
-# Inside Claude
-/help                  # Show commands
-/context               # Check token usage
-/memory                # Edit memory
-/agents                # Manage subagents
+# Read the comprehensive introduction
+cat README.md
 
-# File References
-@file.ts               # Reference file
-! command              # Run bash
-# text                 # Quick memory add
+# Start with fundamentals
+cat 01-getting-started.md
+```
+
+**What you'll learn:**
+- Open, edit, save, and quit files in Neovim
+- Understand modes (Normal, Insert, Visual, Command)
+- Your first practice session
+
+**[Full Neovim Guide →](neovim/README.md)**
+
+---
+
+## 📖 Learning Paths
+
+### Path 1: AI-Powered Development (Quick Start - 2-3 hours)
+
+**Perfect for developers who want to start using AI tools immediately**
+
+1. Claude Code Installation & Setup (45 min)
+2. Basic AI-Assisted Workflow (45 min)
+3. Token Management & Optimization (30 min)
+4. Real-world MERN Stack Example (45 min)
+
+**Outcome:** Productive AI-assisted development for daily work
+
+---
+
+### Path 2: Neovim Fundamentals (Week 1 - 3.5 hours)
+
+**Perfect for developers new to modal editing**
+
+1. Getting Started with Neovim (30 min)
+2. Basic Motions & Navigation (45 min)
+3. Editing Basics (1 hour)
+4. Daily Practice Exercises (1 hour)
+5. Build muscle memory throughout the week
+
+**Outcome:** Comfortable editing files in Neovim without mouse
+
+---
+
+### Path 3: Complete Mastery (4-6 weeks)
+
+**Perfect for developers committed to transforming their workflow**
+
+**Weeks 1-2: Neovim Fundamentals**
+- Complete all Neovim basics
+- Practice 30 min/day
+- Use Neovim exclusively for coding
+
+**Weeks 3-4: AI Integration**
+- Learn Claude Code essentials
+- Integrate AI into daily workflow
+- Optimize token usage and costs
+
+**Weeks 5-6: Advanced Workflows**
+- Neovim advanced techniques
+- Claude Code enterprise patterns
+- Custom automation and integrations
+
+**Outcome:** Expert-level proficiency with both tools, optimized workflow
+
+---
+
+## 🎓 Repository Structure
+
+```
+ai-tools/
+├── README.md (YOU ARE HERE)
+│
+├── claude-code/                    # AI-Assisted Development Guide
+│   ├── README.md                   # Complete guide overview
+│   ├── 00-prerequisites/           # Installation & setup
+│   ├── 01-fundamentals/            # Core concepts & commands
+│   ├── 02-optimization/            # Token & cost optimization
+│   ├── 03-intermediate/            # Advanced workflows
+│   ├── 04-advanced/                # Enterprise patterns
+│   ├── 05-hidden-features/         # Power-user tricks
+│   ├── 06-real-world/              # Practical examples
+│   ├── 07-templates/               # Ready-to-use configs
+│   └── 08-troubleshooting/         # Problem solving
+│
+└── neovim/                         # Neovim Mastery Guide
+    ├── README.md                   # Complete guide overview
+    ├── 01-getting-started.md       # First steps
+    ├── 02-basic-motions.md         # Movement & navigation
+    ├── 03-editing-basics.md        # Text manipulation
+    ├── 04-intermediate-skills.md   # Text objects & operators
+    ├── learning-path.md            # Week-by-week plan
+    ├── practice-exercises.md       # Hands-on drills
+    └── cheatsheet.md               # Quick reference
 ```
 
 ---
 
-## 🌟 What Makes This Guide Special
+## 💡 Why These Tools?
 
-### Comprehensive Coverage
+### Claude Code: AI-Assisted Development
 
-**Not just a manual** - This is a complete learning system that:
-- ✅ Teaches from beginner to expert level
-- ✅ Provides proven workflows from real-world usage
-- ✅ Includes ready-to-use templates
-- ✅ Covers both tool-specific AND universal patterns
-- ✅ Focuses on YOUR stack (MERN, AI/ML)
-- ✅ Shows how to reduce costs significantly (30-50%)
+**The Future of Coding:**
+- 2-3x faster feature development
+- 30-50% reduction in AI API costs
+- Consistent code quality with AI review
+- Automated repetitive tasks
+- Team-wide productivity improvements
+
+**Universal Principles:**
+The patterns you learn apply to any AI coding assistant (GitHub Copilot, Cursor, etc.)
+
+---
+
+### Neovim: Modal Text Editing
+
+**Unmatched Efficiency:**
+- Navigate code without touching the mouse
+- Edit text faster than traditional editors
+- Work efficiently on remote servers
+- Highly customizable to your workflow
+- Lightweight and blazingly fast
+
+**The Investment:**
+- Week 1-2: Learning curve (slower than current editor)
+- Week 3: Match current speed
+- Week 4+: Faster than ever before
+- Lifetime: Compound productivity gains
+
+---
+
+## 🎯 Learning Philosophy
+
+### Our Approach
+
+**1. Progressive Difficulty**
+- Start with fundamentals
+- Build complexity gradually
+- Practice before advancing
+
+**2. Visual Learning**
+- Diagrams and examples
+- See what commands do
+- Understand, don't just memorize
+
+**3. Practical Application**
+- Real-world examples
+- Copy-paste ready code
+- Immediate applicability
+
+**4. Muscle Memory**
+- Practice exercises included
+- Repetition builds speed
+- Daily practice routines
+
+**5. Universal Principles**
+- Tool-agnostic concepts
+- Transferable skills
+- Future-proof knowledge
+
+---
+
+## 🌟 What Makes These Guides Special
+
+### Comprehensive & Structured
+
+- ✅ Complete learning paths from beginner to expert
+- ✅ Estimated time for each section
+- ✅ Progressive difficulty markers (🟢 🟡 🔴)
+- ✅ Clear prerequisites and checkpoints
+- ✅ Tested and verified examples
 
 ### Practical & Actionable
 
-**Every section includes:**
-- Copy-paste ready code examples
-- Real-world workflow demonstrations
-- Best practices AND anti-patterns
-- Troubleshooting guides
-- Quick reference cards
-- Links to related topics
+- ✅ Real-world workflow demonstrations
+- ✅ Copy-paste ready configurations
+- ✅ Best practices AND anti-patterns
+- ✅ Troubleshooting guides
+- ✅ Quick reference cards
 
-### Universal Principles
+### Focused on Your Stack
 
-**While focused on Claude Code, principles apply to:**
-- GitHub Copilot
-- Cursor AI
-- Codeium
-- Any AI coding assistant
-- General AI-assisted development
+**Claude Code Guide:**
+- MERN stack examples (React, Next.js, Node.js)
+- TypeScript patterns
+- PostgreSQL/Prisma workflows
+- AI/ML project integration
 
----
-
-## 💡 How to Use This Guide
-
-### For Individual Learners
-
-1. **Choose your learning path** based on time and goals
-2. **Follow chapters sequentially** within your chosen path
-3. **Try all examples** - every code block is copy-paste ready
-4. **Experiment freely** - Claude Code is safe to explore
-5. **Refer back** - Use this as ongoing reference
-
-### For Teams
-
-1. **Everyone completes Path 1** (Rapid Essentials)
-2. **Team lead completes Path 2** (Professional Mastery)
-3. **Create team memory files** using templates in 07-templates/
-4. **Set up shared integrations** for your stack
-5. **Build custom automation** for your workflows
-6. **Share configurations** via git
-
-### For Instructors
-
-- Each chapter is self-contained
-- Estimated times are conservative
-- All examples are tested and verified
-- Includes anti-patterns section
-- Progressive difficulty marking: 🟢 🟡 🔴
+**Neovim Guide:**
+- Configured for modern development
+- LSP integration examples
+- Git workflow patterns
+- Real coding scenarios
 
 ---
 
-## 🎯 Recommended Study Order
+## ⚡ Quick Reference
 
-**Weekend Warrior (8 hours total)**
+### Claude Code Essentials
 
-- Saturday morning: Chapters 00-01 (2.5 hours)
-- Saturday afternoon: Chapter 02 + 06 (3 hours)
-- Sunday morning: Chapters 03-04 (2.5 hours)
+```bash
+# Start interactive session
+claude
 
-**Daily Learning (1 hour/day for 10 days)**
+# One-shot query
+claude -p "explain this function"
 
-- Day 1-2: Prerequisites + Fundamentals
-- Day 3-4: Optimization
-- Day 5-6: Intermediate
-- Day 7-8: Advanced
-- Day 9: Real-world examples
-- Day 10: Templates + troubleshooting
+# Continue last conversation
+claude -c
+
+# Inside Claude
+/help       # Show all commands
+/context    # Check token usage
+/memory     # Edit project memory
+```
+
+**[Full Claude Code Reference →](claude-code/README.md)**
+
+---
+
+### Neovim Essentials
+
+```
+# Modes
+i           # Insert mode (type text)
+<Esc>       # Normal mode (give commands)
+v           # Visual mode (select text)
+:           # Command mode
+
+# Movement
+hjkl        # Left, down, up, right
+w b e       # Word forward, back, end
+0 $ ^       # Line start, end, first char
+
+# Editing
+dd          # Delete line
+yy          # Copy line
+p           # Paste
+u           # Undo
+
+# Files
+:w          # Save
+:q          # Quit
+:wq         # Save and quit
+```
+
+**[Full Neovim Reference →](neovim/cheatsheet.md)**
+
+---
+
+## 🎓 Recommended Approach
+
+### Option A: AI First (Recommended for Productivity)
+
+**Week 1:** Learn Claude Code essentials (2-3 hours)
+- Immediate productivity boost
+- Start AI-assisted development right away
+- Use with your current editor
+
+**Week 2+:** Add Neovim gradually (30 min/day)
+- Learn Neovim while using Claude Code
+- Combine AI assistance with efficient editing
+- Best of both worlds
+
+---
+
+### Option B: Neovim First (Recommended for Fundamentals)
+
+**Week 1-2:** Master Neovim basics (30 min/day)
+- Build muscle memory first
+- Solid editing foundation
+- Then add AI on top
+
+**Week 3+:** Integrate Claude Code
+- Powerful Neovim skills + AI assistance
+- Ultimate development workflow
+
+---
+
+### Option C: Parallel Learning (Recommended for Fast Learners)
+
+Learn both simultaneously:
+- **Morning:** Neovim practice (15 min)
+- **Work:** Use Claude Code for development
+- **Evening:** Study next concepts (15 min each)
+
+**Timeline:** 3-4 weeks to proficiency in both
+
+---
+
+## 📊 Success Metrics
+
+### After Completing These Guides
+
+**Claude Code Mastery:**
+- ✅ 30-50% reduction in AI API costs
+- ✅ 2-3x faster feature development
+- ✅ Automated code review workflows
+- ✅ Team collaboration patterns
+- ✅ Production-ready AI integration
+
+**Neovim Mastery:**
+- ✅ Navigate code without mouse
+- ✅ Edit text faster than before
+- ✅ Efficient remote development
+- ✅ Customized to your workflow
+- ✅ Muscle memory for common tasks
+
+**Combined Power:**
+- ✅ AI-assisted coding in efficient editor
+- ✅ Optimized development workflow
+- ✅ Measurable productivity improvements
+- ✅ Professional-grade tooling
 
 ---
 
 ## 🔗 Official Resources
 
-### Claude Code / Anthropic
-- **Claude Code Docs:** https://code.claude.com/docs/
-- **Claude API Docs:** https://docs.anthropic.com/
-- **MCP Registry:** https://api.anthropic.com/mcp-registry/docs
+### Claude Code
+- **Docs:** https://code.claude.com/docs/
+- **API:** https://docs.anthropic.com/
 - **Community:** https://github.com/anthropics/claude-code/discussions
-- **Report Issues:** https://github.com/anthropics/claude-code/issues
 
-### Related AI Tools
+### Neovim
+- **Docs:** https://neovim.io/doc/
+- **GitHub:** https://github.com/neovim/neovim
+- **Reddit:** https://reddit.com/r/neovim
+
+### Related Tools
 - **GitHub Copilot:** https://github.com/features/copilot
 - **Cursor:** https://cursor.sh/
 - **Model Context Protocol:** https://modelcontextprotocol.io/
 
 ---
 
-## 💡 Tips for Maximum Learning
+## 💬 Getting Help
 
-1. **Type examples yourself** - Don't just read
-2. **Experiment beyond examples** - Try variations
-3. **Build real projects** - Apply to actual work
-4. **Track your improvements** - Measure token savings, speed gains
-5. **Share your learnings** - Teaching solidifies knowledge
-6. **Join communities** - Learn from others
-7. **Keep this guide open** - Reference while coding
-8. **Stay updated** - AI tools evolve quickly
+### For Claude Code Questions
+- Check [troubleshooting guide](claude-code/08-troubleshooting/common-issues.md)
+- Search [FAQ](claude-code/08-troubleshooting/faq.md)
+- Join [discussions](https://github.com/anthropics/claude-code/discussions)
 
----
-
-## 🎓 What's Next After This Guide?
-
-Once you complete this guide:
-
-1. **Adapt patterns to other AI tools** - Principles are universal
-2. **Create your own workflows** - Customize for your needs
-3. **Build team processes** - Scale across organization
-4. **Explore integrations** - Connect AI tools to your ecosystem
-5. **Contribute back** - Share improvements with community
-6. **Stay current** - Follow AI tool developments
+### For Neovim Questions
+- Use `:help` command in Neovim
+- Check [Neovim cheatsheet](neovim/cheatsheet.md)
+- Visit [r/neovim](https://reddit.com/r/neovim)
 
 ---
 
-## 📊 Success Metrics
+## 🤝 Contributing
 
-After completing this guide, you should achieve:
+Found an error? Have a suggestion? Want to improve these guides?
 
-- ✅ 30-50% reduction in token costs
-- ✅ 2-3x faster feature development
-- ✅ Consistent code quality with AI review
-- ✅ Automated repetitive tasks
-- ✅ Effective AI-human collaboration workflow
-- ✅ Team-wide AI tool adoption
-- ✅ Measurable productivity improvements
+- **Report Issues:** Open an issue describing what you found
+- **Suggest Improvements:** Share your ideas for better explanations
+- **Share Workflows:** Contribute your proven patterns
 
 ---
 
-## 📝 About This Guide
+## 📝 About This Repository
 
-**Version:** 1.0
-**Last Updated:** December 2025
-**Primary Tool:** Claude Code (Anthropic)
-**Universal Applicability:** High (70%+ of content applies to any AI coding tool)
-**Target Audience:** MERN stack developers, AI/ML engineers, software teams
-**Estimated Total Time:** 12-15 hours for complete mastery
+**Created for:** Developers who want to master modern development tools and AI-assisted workflows
 
-**Created for:** Developers who want to master AI-assisted development, optimize costs, and build production-ready applications faster.
+**Focus Areas:**
+- AI-powered development with Claude Code
+- Efficient text editing with Neovim
+- MERN stack development patterns
+- Productivity optimization
+- Professional workflows
 
----
-
-## 🎯 Core Philosophy
-
-**This guide teaches:**
-- ✅ **Tool-specific details** where they matter (Claude Code CLI)
-- ✅ **Universal principles** that transfer across AI tools
-- ✅ **Real-world workflows** not just theoretical concepts
-- ✅ **Cost optimization** because budgets matter
-- ✅ **Professional practices** for production use
-- ✅ **Team collaboration** for organizational success
-
-**Whether you use Claude Code, GitHub Copilot, Cursor, or any AI assistant** - the core principles of effective AI-assisted development remain the same.
+**Philosophy:**
+- Learn by doing, not just reading
+- Progressive difficulty with clear milestones
+- Universal principles over tool-specific tricks
+- Practical application over theoretical knowledge
 
 ---
 
-**Ready to transform your development workflow with AI?**
+## 🎯 Next Steps
 
-👉 **Start here:** [00-prerequisites/installation-guide.md](00-prerequisites/installation-guide.md)
+### Choose Your Starting Point:
+
+**Want immediate productivity gains?**
+👉 [Start with Claude Code →](claude-code/README.md)
+
+**Want to master efficient editing?**
+👉 [Start with Neovim →](neovim/README.md)
+
+**Want to master both?**
+👉 Pick one above, then come back for the other!
 
 ---
 
-*This guide covers Claude Code specifically but teaches universal AI-assisted development principles applicable across all modern AI coding tools. For the latest Claude Code updates, check https://code.claude.com/docs/*
+## 💡 Final Thoughts
+
+**These are investment skills:**
+- Short-term effort for long-term gains
+- Compound productivity improvements
+- Transferable to any project
+- Future-proof your workflow
+
+**The best time to start was yesterday. The second best time is now.**
+
+Choose your path and begin your mastery journey! 🚀
+
+---
+
+**Last Updated:** February 2026
+**Maintained by:** Active Learning Community
+**License:** Educational Use
+
+---
+
+*Learn. Practice. Master. Transform your development workflow.*
