@@ -46,12 +46,32 @@ A structured, visual guide to learning Neovim from the ground up with:
 
 ---
 
+### 🖥️ [Tmux - Terminal Multiplexer Mastery](tmux/)
+
+**From beginner to power user: Master terminal multiplexing**
+
+A comprehensive guide to using tmux for efficient terminal workflows with:
+- Session management and persistence
+- Multiple windows and pane layouts
+- Vim-style key bindings and customization
+- Development workflows and automation
+- Remote work and pair programming setups
+
+**Time Investment:** 2-5 hours
+**Skill Level:** Beginner to Advanced
+**Focus:** Terminal multiplexing, session management, workflow automation
+
+👉 **[Start Learning Tmux →](tmux/README.md)**
+
+---
+
 ## 🎯 Who This Is For
 
 ### You Should Use This Repository If You Want To:
 
 ✅ **Master AI-assisted development** with Claude Code or similar tools
 ✅ **Become proficient with Neovim** for faster, keyboard-driven editing
+✅ **Master terminal multiplexing** with tmux for efficient workflows
 ✅ **Optimize your development workflow** for maximum productivity
 ✅ **Reduce AI API costs** while improving code quality
 ✅ **Learn modern development practices** with step-by-step guidance
@@ -110,6 +130,29 @@ cat 01-getting-started.md
 - Your first practice session
 
 **[Full Neovim Guide →](neovim/README.md)**
+
+---
+
+### Getting Started with Tmux (5 minutes)
+
+```bash
+# Navigate to Tmux guide
+cd tmux
+
+# Read the comprehensive guide
+cat README.md
+
+# Try the interactive demo
+./quick-start.sh
+```
+
+**What you'll learn:**
+- Create and manage tmux sessions
+- Split windows into panes
+- Navigate with vim-style bindings
+- Detach and reattach sessions
+
+**[Full Tmux Guide →](tmux/README.md)**
 
 ---
 
@@ -183,15 +226,22 @@ ai-tools/
 │   ├── 07-templates/               # Ready-to-use configs
 │   └── 08-troubleshooting/         # Problem solving
 │
-└── neovim/                         # Neovim Mastery Guide
+├── neovim/                         # Neovim Mastery Guide
+│   ├── README.md                   # Complete guide overview
+│   ├── 01-getting-started.md       # First steps
+│   ├── 02-basic-motions.md         # Movement & navigation
+│   ├── 03-editing-basics.md        # Text manipulation
+│   ├── 04-intermediate-skills.md   # Text objects & operators
+│   ├── learning-path.md            # Week-by-week plan
+│   ├── practice-exercises.md       # Hands-on drills
+│   └── cheatsheet.md               # Quick reference
+│
+└── tmux/                           # Tmux Terminal Multiplexer Guide
     ├── README.md                   # Complete guide overview
-    ├── 01-getting-started.md       # First steps
-    ├── 02-basic-motions.md         # Movement & navigation
-    ├── 03-editing-basics.md        # Text manipulation
-    ├── 04-intermediate-skills.md   # Text objects & operators
-    ├── learning-path.md            # Week-by-week plan
-    ├── practice-exercises.md       # Hands-on drills
-    └── cheatsheet.md               # Quick reference
+    ├── CHEATSHEET.md               # Quick reference
+    ├── WORKFLOWS.md                # Real-world workflows
+    ├── CUSTOMIZATION.md            # Advanced configuration
+    └── quick-start.sh              # Interactive demo script
 ```
 
 ---
