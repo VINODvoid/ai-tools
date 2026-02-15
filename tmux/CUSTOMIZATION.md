@@ -46,6 +46,52 @@ set -g prefix2 C-b
 
 ## Color Schemes
 
+### Current: Catppuccin Theme (ACTIVE)
+
+The configuration uses **Catppuccin Mocha** theme via TPM plugin.
+
+#### Theme Variants
+
+Edit `~/.tmux.conf` and change the flavor:
+
+```bash
+set -g @catppuccin_flavor 'mocha'      # Dark with warm tones (CURRENT)
+set -g @catppuccin_flavor 'frappe'     # Dark with cool tones
+set -g @catppuccin_flavor 'macchiato'  # Medium dark
+set -g @catppuccin_flavor 'latte'      # Light theme
+```
+
+After changing, reload config: `Ctrl-a r`
+
+#### Catppuccin Customization
+
+Current configuration in `~/.tmux.conf`:
+
+```bash
+# Status modules
+set -g @catppuccin_status_modules_right "directory date_time"
+set -g @catppuccin_status_modules_left "session"
+
+# Window appearance
+set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
+set -g @catppuccin_window_default_text "#W"
+
+# Directory and time format
+set -g @catppuccin_directory_text "#{b:pane_current_path}"
+set -g @catppuccin_date_time_text "%H:%M"
+```
+
+**To disable Catppuccin and use custom colors:**
+1. Comment out `set -g @plugin 'catppuccin/tmux'` in `~/.tmux.conf`
+2. Uncomment the custom visual settings section
+3. Reload: `Ctrl-a r` and run `Ctrl-a U`
+
+---
+
+### Alternative Themes (Disabled)
+
+To use these, disable Catppuccin first.
+
 ### Minimal Dark Theme
 
 ```bash
@@ -234,23 +280,27 @@ Ctrl-a U  # Update
 Ctrl-a alt-u  # Uninstall
 ```
 
-### Essential Plugins
+### Currently Installed Plugins
+
+These are **ACTIVE** in your configuration:
 
 ```bash
-# Better defaults
-set -g @plugin 'tmux-plugins/tmux-sensible'
+# Core plugins
+set -g @plugin 'tmux-plugins/tpm'                    # Plugin manager
+set -g @plugin 'tmux-plugins/tmux-sensible'          # Better defaults
+set -g @plugin 'tmux-plugins/tmux-resurrect'         # Save/restore sessions
+set -g @plugin 'tmux-plugins/tmux-continuum'         # Auto-save sessions
+set -g @plugin 'tmux-plugins/tmux-yank'              # Better clipboard
+set -g @plugin 'christoomey/vim-tmux-navigator'      # Vim integration
+set -g @plugin 'sainnhe/tmux-fzf'                    # Fuzzy finder
+set -g @plugin 'catppuccin/tmux'                     # Beautiful theme
+```
 
-# Save/restore sessions
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-restore 'on'
+### Additional Plugins (Optional)
 
-# Better copy/paste
-set -g @plugin 'tmux-plugins/tmux-yank'
+Add these to `~/.tmux.conf` if needed:
 
-# Pane navigation
-set -g @plugin 'christoomey/vim-tmux-navigator'
-
+```bash
 # Sidebar file tree
 set -g @plugin 'tmux-plugins/tmux-sidebar'
 
@@ -262,23 +312,46 @@ set -g @plugin 'tmux-plugins/tmux-cpu'
 
 # Battery status
 set -g @plugin 'tmux-plugins/tmux-battery'
+
+# Open highlighted files/URLs
+set -g @plugin 'tmux-plugins/tmux-open'
+
+# Better session manager
+set -g @plugin 'tmux-plugins/tmux-sessionist'
 ```
+
+After adding, press `Ctrl-a I` to install.
 
 ### Plugin Customization
 
+**Current Active Settings:**
+
 ```bash
-# tmux-resurrect: Save vim/nvim sessions
+# tmux-resurrect: Save neovim sessions
 set -g @resurrect-strategy-nvim 'session'
+set -g @resurrect-capture-pane-contents 'on'
 
-# tmux-continuum: Auto-save interval
+# tmux-continuum: Auto-save every 15 minutes
+set -g @continuum-restore 'on'
 set -g @continuum-save-interval '15'
+```
 
+**Additional Options:**
+
+```bash
 # tmux-yank: Copy to system clipboard
 set -g @yank_selection 'clipboard'
 set -g @yank_selection_mouse 'clipboard'
 
-# tmux-prefix-highlight: Show in status
+# tmux-prefix-highlight: Show in status (if installed)
 set -g status-right '#{prefix_highlight} %a %Y-%m-%d %H:%M'
+
+# tmux-sidebar: File tree position
+set -g @sidebar-tree-position 'right'
+set -g @sidebar-tree-width '40'
+
+# tmux-cpu: Display format
+set -g @cpu_percentage_format "%3.0f%%"
 ```
 
 ---

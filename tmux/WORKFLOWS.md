@@ -390,6 +390,71 @@ done
 
 ---
 
+## Modern Features Integration
+
+### 1. Popup Windows (NEW!)
+
+Quick access to git, terminals, and tools:
+
+```bash
+# Git status popup (90% screen)
+Ctrl-a g
+
+# Generic popup terminal
+Ctrl-a G
+
+# Custom popup commands (add to config)
+bind h display-popup -E -w 80% -h 80% "htop"
+bind f display-popup -E -w 80% -h 80% "ranger"
+```
+
+**Use cases:**
+- Quick git status without switching panes
+- Temporary calculator or quick command
+- File browsing overlay
+
+---
+
+### 2. Session Persistence (AUTO!)
+
+Your sessions now **auto-save every 15 minutes** and restore on tmux restart!
+
+```bash
+# Manual save
+Ctrl-a Ctrl-s
+
+# Manual restore (after reboot)
+Ctrl-a Ctrl-r
+
+# Check last save time
+tmux show-option -gv @continuum-save-interval
+```
+
+**Benefits:**
+- Survive system reboots
+- Restore entire workspace instantly
+- Never lose your session layout
+- Pane contents are preserved!
+
+---
+
+### 3. Fuzzy Finding
+
+Use tmux-fzf for quick navigation:
+
+```bash
+# Open fuzzy finder
+Ctrl-a f
+
+# Then select:
+# - Sessions
+# - Windows
+# - Panes
+# - Commands
+```
+
+---
+
 ## Advanced Tips
 
 ### 1. Synchronized Panes

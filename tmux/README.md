@@ -79,6 +79,16 @@ tmux kill-session -t mysession
 - `Ctrl-v` - Rectangle selection
 - `Ctrl-a p` - Paste
 
+### Modern Features
+- `Ctrl-a g` - Git status popup window
+- `Ctrl-a G` - Generic popup terminal
+- `Ctrl-a S` - Toggle status bar
+- `Ctrl-a s` - Synchronize panes (type in all at once)
+- `Ctrl-a C-c` - Create new session
+- `Ctrl-a C-f` - Find and switch session
+- `Ctrl-a X` - Kill current session
+- `Ctrl-a f` - Tmux-fzf fuzzy finder
+
 ### Misc
 - `Ctrl-a r` - Reload config
 - `Ctrl-a ?` - List all key bindings
@@ -91,9 +101,10 @@ tmux kill-session -t mysession
 
 ### 🎨 Visual Features
 - **True color support** for modern terminals
-- **Custom color scheme** with cyan active borders
-- **Informative status bar** with session name, date, and time
-- **Clear window indicators**
+- **Catppuccin Mocha theme** - Beautiful soothing pastel colors (2.8k+ stars)
+- **Informative status bar** with session, directory, and time
+- **Clean, modern window indicators**
+- **Multiple theme variants** available (Mocha, Frappé, Macchiato, Latte)
 
 ### ⌨️ Productivity Features
 - **Prefix changed to Ctrl-a** - easier to reach than Ctrl-b
@@ -191,21 +202,39 @@ N                # Previous match
 
 ## Plugin System (TPM)
 
-Tmux Plugin Manager extends functionality. To enable (optional):
+Tmux Plugin Manager is **ENABLED** with essential plugins installed:
+
+### Installed Plugins
+
+1. **tmux-sensible** - Better defaults out of the box
+2. **tmux-resurrect** - Save/restore sessions (survives reboots!)
+   - Save: `Ctrl-a Ctrl-s`
+   - Restore: `Ctrl-a Ctrl-r`
+3. **tmux-continuum** - Auto-saves every 15 minutes
+4. **tmux-yank** - Superior clipboard integration
+5. **vim-tmux-navigator** - Seamless Vim/Neovim navigation
+6. **tmux-fzf** - Fuzzy finder for sessions, windows, panes
+7. **catppuccin/tmux** - Beautiful Catppuccin theme
+
+### Plugin Management
 
 ```bash
-# Install TPM
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Inside tmux:
+Ctrl-a I         # Install new plugins
+Ctrl-a U         # Update all plugins
+Ctrl-a alt-u     # Uninstall removed plugins
+```
 
-# Uncomment plugin lines in ~/.tmux.conf
-# Then install plugins:
-Ctrl-a I    # Install plugins
+### First Time Setup
 
-# Recommended plugins (already in config):
-# - tmux-sensible: Sensible defaults
-# - tmux-resurrect: Save/restore sessions
-# - tmux-continuum: Automatic session saving
-# - tmux-yank: Better copy/paste
+✅ TPM is already installed!
+
+Just start tmux and press `Ctrl-a I` to install all plugins:
+
+```bash
+tmux
+# Then press: Ctrl-a I (capital I)
+# Wait 10-30 seconds for installation
 ```
 
 ---

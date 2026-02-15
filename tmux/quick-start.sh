@@ -30,16 +30,22 @@ tmux send-keys -t tmux-demo:0 'echo "━━━━━━━━━━━━━━�
 tmux send-keys -t tmux-demo:0 'echo "   Welcome to Tmux! "' C-m
 tmux send-keys -t tmux-demo:0 'echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"' C-m
 tmux send-keys -t tmux-demo:0 'echo ""' C-m
+tmux send-keys -t tmux-demo:0 'echo "🎨 Theme: Catppuccin Mocha (Beautiful!)"' C-m
+tmux send-keys -t tmux-demo:0 'echo ""' C-m
 tmux send-keys -t tmux-demo:0 'echo "Key Bindings Reference:"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a ?  - Show all key bindings"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a |  - Split vertically"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a -  - Split horizontally"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a h/j/k/l - Navigate panes"' C-m
+tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a g  - Git status popup"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a c  - New window"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a d  - Detach session"' C-m
 tmux send-keys -t tmux-demo:0 'echo "  Ctrl-a r  - Reload config"' C-m
 tmux send-keys -t tmux-demo:0 'echo ""' C-m
-tmux send-keys -t tmux-demo:0 'echo "📚 Documentation in: ~/Documents/projects/ai-tools/tmux/"' C-m
+tmux send-keys -t tmux-demo:0 'echo "🔌 Plugins: Press Ctrl-a I to install"' C-m
+tmux send-keys -t tmux-demo:0 'echo "💾 Auto-save: Sessions auto-save every 15min"' C-m
+tmux send-keys -t tmux-demo:0 'echo ""' C-m
+tmux send-keys -t tmux-demo:0 'echo "📚 Documentation: ~/Documents/projects/ai-tools/tmux/"' C-m
 tmux send-keys -t tmux-demo:0 'echo ""' C-m
 
 # Split vertically
@@ -54,10 +60,14 @@ tmux send-keys -t tmux-demo:0.1 'tmux -V' C-m
 tmux send-keys -t tmux-demo:0.1 'echo ""' C-m
 tmux send-keys -t tmux-demo:0.1 'echo "Current session: tmux-demo"' C-m
 tmux send-keys -t tmux-demo:0.1 'echo ""' C-m
-tmux send-keys -t tmux-demo:0.1 'echo "Try these commands:"' C-m
+tmux send-keys -t tmux-demo:0.1 'echo "Try these modern features:"' C-m
 tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a z  - Zoom this pane"' C-m
-tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a x  - Close this pane"' C-m
+tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a g  - Git popup"' C-m
+tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a G  - Generic popup"' C-m
+tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a s  - Sync panes"' C-m
 tmux send-keys -t tmux-demo:0.1 'echo "  • Ctrl-a t  - Show clock"' C-m
+tmux send-keys -t tmux-demo:0.1 'echo ""' C-m
+tmux send-keys -t tmux-demo:0.1 'echo "Vim users: Seamless navigation!"' C-m
 
 # Select left pane
 tmux select-pane -t tmux-demo:0.0

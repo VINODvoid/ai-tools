@@ -102,6 +102,40 @@ tmux split-window -v          # Split vertically
 
 ---
 
+## Modern Features
+
+| Key | Action |
+|-----|--------|
+| `Ctrl-a g` | Git status popup |
+| `Ctrl-a G` | Generic popup terminal |
+| `Ctrl-a S` | Toggle status bar |
+| `Ctrl-a s` | Synchronize panes |
+| `Ctrl-a C-c` | Create new session |
+| `Ctrl-a C-f` | Find session |
+| `Ctrl-a X` | Kill session |
+| `Ctrl-a f` | Tmux-fzf fuzzy finder |
+
+---
+
+## Plugin Commands (TPM)
+
+| Key | Action |
+|-----|--------|
+| `Ctrl-a I` | Install plugins (capital I) |
+| `Ctrl-a U` | Update plugins (capital U) |
+| `Ctrl-a alt-u` | Uninstall removed plugins |
+
+### Resurrect Plugin
+
+| Key | Action |
+|-----|--------|
+| `Ctrl-a Ctrl-s` | Save session manually |
+| `Ctrl-a Ctrl-r` | Restore session |
+
+**Note:** Sessions auto-save every 15 minutes!
+
+---
+
 ## Misc
 
 | Key | Action |
