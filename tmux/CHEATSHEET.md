@@ -10,210 +10,207 @@ Quick reference for tmux commands and key bindings.
 
 ```bash
 # Sessions
-tmux                          # Start new session
-tmux new -s name              # Start named session
-tmux ls                       # List sessions
-tmux attach                   # Attach to last session
-tmux attach -t name           # Attach to named session
-tmux kill-session -t name     # Kill session
-tmux kill-server              # Kill all sessions
+tmux                            # Start new session
+tmux new -s name                # Start named session
+tmux ls                         # List all sessions
+tmux attach                     # Attach to last session
+tmux attach -t name             # Attach to named session
+tmux kill-session -t name       # Kill specific session
+tmux kill-server                # Kill all sessions
 
 # Windows
-tmux list-windows             # List windows
-tmux select-window -t :0-9    # Select window by number
+tmux list-windows               # List windows in session
+tmux select-window -t :0-9      # Select window by number
 
 # Panes
-tmux split-window -h          # Split horizontally
-tmux split-window -v          # Split vertically
+tmux split-window -h            # Split horizontally (side-by-side)
+tmux split-window -v            # Split vertically (top-bottom)
 ```
 
 ---
 
 ## Sessions
 
-| Key | Action |
-|-----|--------|
-| `Ctrl-a d` | Detach session |
-| `Ctrl-a $` | Rename session |
-| `Ctrl-a s` | List sessions |
-| `Ctrl-a (` | Previous session |
-| `Ctrl-a )` | Next session |
+| Binding | Action |
+|---------|--------|
+| `Ctrl-a d` | Detach from session |
+| `Ctrl-a $` | Rename current session |
+| `Ctrl-a s` | List sessions (interactive) |
+| `Ctrl-a (` | Switch to previous session |
+| `Ctrl-a )` | Switch to next session |
 
 ---
 
 ## Windows
 
-| Key | Action |
-|-----|--------|
-| `Ctrl-a c` | Create window |
-| `Ctrl-a ,` | Rename window |
-| `Ctrl-a w` | List windows |
+| Binding | Action |
+|---------|--------|
+| `Ctrl-a c` | Create new window |
+| `Ctrl-a ,` | Rename current window |
+| `Ctrl-a w` | List all windows |
 | `Ctrl-a n` | Next window |
 | `Ctrl-a p` | Previous window |
 | `Ctrl-a 0-9` | Jump to window # |
-| `Ctrl-a &` | Kill window |
-| `Ctrl-a f` | Find window |
-| `Ctrl-a .` | Move window |
+| `Ctrl-a &` | Kill current window |
+| `Ctrl-a f` | Find window by name |
+| `Ctrl-a .` | Move window to index |
 
 ---
 
 ## Panes
 
-| Key | Action |
-|-----|--------|
-| `Ctrl-a \|` | Split vertical |
-| `Ctrl-a -` | Split horizontal |
+| Binding | Action |
+|---------|--------|
+| `Ctrl-a \|` | Split vertically |
+| `Ctrl-a -` | Split horizontally |
 | `Ctrl-a h` | Go to left pane |
 | `Ctrl-a j` | Go to bottom pane |
 | `Ctrl-a k` | Go to top pane |
 | `Ctrl-a l` | Go to right pane |
-| `Ctrl-a H` | Resize left |
-| `Ctrl-a J` | Resize down |
-| `Ctrl-a K` | Resize up |
-| `Ctrl-a L` | Resize right |
-| `Ctrl-a x` | Kill pane |
-| `Ctrl-a z` | Toggle zoom |
+| `Ctrl-a H` | Resize pane left (5 cells) |
+| `Ctrl-a J` | Resize pane down (5 cells) |
+| `Ctrl-a K` | Resize pane up (5 cells) |
+| `Ctrl-a L` | Resize pane right (5 cells) |
+| `Ctrl-a x` | Kill current pane |
+| `Ctrl-a m` | Toggle pane zoom (maximize) |
 | `Ctrl-a {` | Move pane left |
 | `Ctrl-a }` | Move pane right |
-| `Ctrl-a space` | Cycle layouts |
+| `Ctrl-a space` | Cycle through layouts |
 | `Ctrl-a q` | Show pane numbers |
 | `Ctrl-a o` | Next pane |
-| `Ctrl-a ;` | Last pane |
-| `Ctrl-a !` | Break pane to window |
+| `Ctrl-a ;` | Last active pane |
+| `Ctrl-a !` | Break pane into new window |
 
 ---
 
-## Copy Mode
+## Copy Mode (Vim-style)
 
-| Key | Action |
-|-----|--------|
-| `Ctrl-a Escape` | Enter copy mode |
-| `Ctrl-a p` | Paste buffer |
+| Binding | Action |
+|---------|--------|
+| `Ctrl-a Escape` or `Ctrl-a [` | Enter copy mode |
+| `Ctrl-a p` | Paste from buffer |
 | `q` | Quit copy mode |
 | `/` | Search forward |
 | `?` | Search backward |
 | `n` | Next search result |
 | `N` | Previous search result |
 | `v` | Begin selection |
-| `y` | Copy selection |
+| `y` | Copy selection and exit |
 | `Ctrl-v` | Rectangle selection |
-| `Space` | Start selection |
-| `Enter` | Copy selection |
-
----
-
-## Modern Features
-
-| Key | Action |
-|-----|--------|
-| `Ctrl-a g` | Git status popup |
-| `Ctrl-a G` | Generic popup terminal |
-| `Ctrl-a S` | Toggle status bar |
-| `Ctrl-a s` | Synchronize panes |
-| `Ctrl-a C-c` | Create new session |
-| `Ctrl-a C-f` | Find session |
-| `Ctrl-a X` | Kill session |
-| `Ctrl-a f` | Tmux-fzf fuzzy finder |
+| `Space` | Begin selection (alternate) |
+| `Enter` | Copy and exit (alternate) |
 
 ---
 
 ## Plugin Commands (TPM)
 
-| Key | Action |
-|-----|--------|
+| Binding | Action |
+|---------|--------|
 | `Ctrl-a I` | Install plugins (capital I) |
 | `Ctrl-a U` | Update plugins (capital U) |
 | `Ctrl-a alt-u` | Uninstall removed plugins |
 
-### Resurrect Plugin
+### Session Persistence (Resurrect)
 
-| Key | Action |
-|-----|--------|
+| Binding | Action |
+|---------|--------|
 | `Ctrl-a Ctrl-s` | Save session manually |
 | `Ctrl-a Ctrl-r` | Restore session |
 
-**Note:** Sessions auto-save every 15 minutes!
+**Note:** Sessions auto-save every 15 minutes with continuum!
 
 ---
 
-## Misc
+## System Commands
 
-| Key | Action |
-|-----|--------|
-| `Ctrl-a ?` | List all bindings |
+| Binding | Action |
+|---------|--------|
+| `Ctrl-a r` | Reload configuration |
+| `Ctrl-a ?` | List all key bindings |
 | `Ctrl-a :` | Command prompt |
-| `Ctrl-a r` | Reload config |
-| `Ctrl-a t` | Show time |
-| `Ctrl-a i` | Display info |
+| `Ctrl-a t` | Show clock (full screen) |
 
 ---
 
 ## Command Mode
 
-Press `Ctrl-a :` then:
+Press `Ctrl-a :` then type:
 
 ```bash
 # Window management
-rename-window name              # Rename window
-swap-window -s 2 -t 1          # Swap windows
-move-window -t 0               # Move to position 0
+rename-window name                # Rename current window
+swap-window -s 2 -t 1             # Swap window 2 with 1
+move-window -t 0                  # Move window to position 0
 
 # Pane management
-resize-pane -D 10              # Resize down 10 lines
-resize-pane -U 10              # Resize up 10 lines
-resize-pane -L 10              # Resize left 10 columns
-resize-pane -R 10              # Resize right 10 columns
-swap-pane -U                   # Swap with previous pane
-swap-pane -D                   # Swap with next pane
+resize-pane -D 10                 # Resize down 10 lines
+resize-pane -U 10                 # Resize up 10 lines
+resize-pane -L 10                 # Resize left 10 columns
+resize-pane -R 10                 # Resize right 10 columns
+swap-pane -U                      # Swap with previous pane
+swap-pane -D                      # Swap with next pane
 
-# Layout
-select-layout even-horizontal   # Evenly space horizontal
-select-layout even-vertical     # Evenly space vertical
-select-layout main-horizontal   # Large pane on top
-select-layout main-vertical     # Large pane on left
-select-layout tiled            # Grid layout
+# Layouts
+select-layout even-horizontal     # Equal width, horizontal
+select-layout even-vertical       # Equal height, vertical
+select-layout main-horizontal     # Large pane on top
+select-layout main-vertical       # Large pane on left
+select-layout tiled               # Grid layout (equal)
 
-# Session
-detach-client                  # Detach current client
+# Session management
+detach-client                     # Detach current client
+rename-session name               # Rename current session
+
+# Pane synchronization
+setw synchronize-panes on         # Type in all panes at once
+setw synchronize-panes off        # Disable synchronization
 ```
 
 ---
 
 ## Mouse Support
 
-Mouse is **enabled** by default in this config:
+Mouse is **enabled** by default:
 
-- Click pane to select
-- Click window name to switch
-- Drag pane border to resize
-- Scroll to navigate history
-- Right-click for menu (in some terminals)
+- **Click pane** to select it
+- **Click window** name to switch
+- **Drag border** to resize panes
+- **Scroll** to navigate history
+- **Right-click** for context menu (terminal-dependent)
 
-Disable temporarily:
+Temporarily disable:
 ```bash
-tmux set -g mouse off
+Ctrl-a : set -g mouse off
 ```
 
 ---
 
 ## Scripting Examples
 
+### Create Session with Windows
+
 ```bash
-# Create session with windows
 tmux new-session -d -s dev
 tmux rename-window -t dev:0 'editor'
 tmux new-window -t dev:1 -n 'server'
 tmux new-window -t dev:2 -n 'logs'
 tmux attach -t dev
+```
 
-# Create session with panes
+### Create Session with Panes
+
+```bash
 tmux new-session -d -s work
 tmux split-window -h
 tmux split-window -v
 tmux select-pane -t 0
 tmux attach -t work
+```
 
-# Send commands to pane
+### Send Commands to Panes
+
+```bash
+# Send to specific window:pane
 tmux send-keys -t dev:1 'npm start' C-m
 tmux send-keys -t dev:2 'tail -f app.log' C-m
 ```
@@ -222,17 +219,53 @@ tmux send-keys -t dev:2 'tail -f app.log' C-m
 
 ## Quick Layouts
 
+### Three Pane Layout (Editor + 2 Shells)
+
+```
+┌─────────────────┬─────────────┐
+│                 │             │
+│     Editor      │   Shell 1   │
+│                 ├─────────────┤
+│                 │   Shell 2   │
+└─────────────────┴─────────────┘
+```
+
 ```bash
-# Three pane layout
-Ctrl-a "                # Split horizontal
-Ctrl-a %                # Split vertical (on new pane)
+Ctrl-a |              # Split vertical
+Ctrl-a l              # Move right
+Ctrl-a -              # Split horizontal
+```
 
-# Four pane grid
-Ctrl-a "                # Split horizontal
-Ctrl-a : select-layout tiled
+### Four Pane Grid
 
-# Main + sidebar
-Ctrl-a %                # Split vertical
+```
+┌─────────────┬─────────────┐
+│             │             │
+│   Pane 1    │   Pane 2    │
+├─────────────┼─────────────┤
+│   Pane 3    │   Pane 4    │
+└─────────────┴─────────────┘
+```
+
+```bash
+Ctrl-a -              # Split horizontal
+Ctrl-a |              # Split right pane vertical
+Ctrl-a k              # Go to top pane
+Ctrl-a |              # Split top pane vertical
+```
+
+### Main + Sidebar
+
+```
+┌──────────────────┬──────┐
+│                  │      │
+│      Main        │ Side │
+│                  │      │
+└──────────────────┴──────┘
+```
+
+```bash
+Ctrl-a |              # Split vertical
 Ctrl-a : select-layout main-vertical
 ```
 
@@ -240,12 +273,52 @@ Ctrl-a : select-layout main-vertical
 
 ## Pro Tips
 
-1. **Prefix twice:** `Ctrl-a Ctrl-a` sends prefix to nested tmux
-2. **Quick commands:** Type commands without prefix in command mode
-3. **Session workflows:** One session per project
-4. **Pane synchronization:** `Ctrl-a : setw synchronize-panes` - send input to all panes
-5. **Clock:** `Ctrl-a t` - full screen clock (exit with any key)
+1. **Nested tmux:** `Ctrl-a Ctrl-a` sends prefix to remote tmux session
+2. **Quick switch:** Use `Ctrl-a s` for interactive session list
+3. **One session per project:** Maintain separate contexts
+4. **Pane sync:** `Ctrl-a : setw synchronize-panes` to type in all panes
+5. **Copy mode:** Use `/` and `?` to search scrollback efficiently
+6. **Clock mode:** `Ctrl-a t` for full-screen clock (any key to exit)
+7. **Muscle memory:** Practice daily - becomes second nature in a week
 
 ---
 
-**Print this cheatsheet and keep it handy until muscle memory kicks in!**
+## Configuration Reload
+
+After editing `~/.tmux.conf`:
+
+```bash
+# Inside tmux
+Ctrl-a r
+
+# From terminal
+tmux source-file ~/.tmux.conf
+```
+
+---
+
+## PowerKit Theme Quick Reference
+
+Switch themes by editing `~/.tmux.conf`:
+
+```bash
+set -g @powerkit_theme "nord"         # Current (cool, minimal)
+set -g @powerkit_theme "catppuccin"   # Pastel, modern
+set -g @powerkit_theme "tokyo-night"  # Dark, vibrant
+set -g @powerkit_theme "dracula"      # Dark, colorful
+set -g @powerkit_theme "gruvbox"      # Warm, retro
+```
+
+Then reload: `Ctrl-a r`
+
+---
+
+**Print this cheatsheet and keep it visible until muscle memory develops!**
+
+**Most Used Commands:**
+- `tmux new -s <name>` - Start named session
+- `Ctrl-a d` - Detach
+- `tmux attach -t <name>` - Reattach
+- `Ctrl-a |` and `Ctrl-a -` - Split panes
+- `Ctrl-a h/j/k/l` - Navigate panes
+- `Ctrl-a r` - Reload config

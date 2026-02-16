@@ -1,380 +1,373 @@
 # Tmux Customization Guide
 
-Advanced configuration options and customization techniques.
+Advanced configuration and personalization for your tmux setup.
+
+**Config File:** `~/.tmux.conf`
 
 ---
 
-## Configuration Structure
+## PowerKit Theme System
 
-The main config file is `~/.tmux.conf`. Changes take effect after:
+Your tmux uses the **PowerKit framework** (via `tmux-tokyo-night` plugin) for beautiful, modular status bars.
 
-```bash
-# Inside tmux
-Ctrl-a r
+### Available Themes
 
-# Or from command line
-tmux source-file ~/.tmux.conf
-```
-
----
-
-## Prefix Key Options
-
-The prefix is the most important binding. Common alternatives:
+Switch themes by editing line 77 in `~/.tmux.conf`:
 
 ```bash
-# Default (Ctrl-b)
-set -g prefix C-b
+# Arctic & Minimal
+set -g @powerkit_theme "nord"              # Cool blues (CURRENT)
 
-# Screen-style (Ctrl-a) - CURRENT
-set -g prefix C-a
+# Pastel & Modern
+set -g @powerkit_theme "catppuccin"        # Soothing pastels
+set -g @powerkit_theme_variant "mocha"     # Dark variant
 
-# Ctrl-Space (no conflict with terminal)
-set -g prefix C-Space
+# Dark & Vibrant
+set -g @powerkit_theme "tokyo-night"       # Night coding theme
+set -g @powerkit_theme "dracula"           # Purple-heavy dark
+set -g @powerkit_theme "monokai"           # Classic dark
 
-# Backtick (`)
-set -g prefix `
+# Elegant & Subtle
+set -g @powerkit_theme "rose-pine"         # Subtle, elegant
+set -g @powerkit_theme "vesper"            # Calm, dark
+set -g @powerkit_theme "osaka-jade"        # Japanese aesthetic
 
-# Multiple prefixes (advanced)
-set -g prefix C-a
-set -g prefix2 C-b
+# Retro & Warm
+set -g @powerkit_theme "gruvbox"           # Warm, retro
+set -g @powerkit_theme "everforest"        # Natural, calm
+
+# Light Themes
+set -g @powerkit_theme "github"            # GitHub light
+set -g @powerkit_theme_variant "light"
 ```
 
-**Recommendation:** `Ctrl-a` balances accessibility and avoiding conflicts.
+**Full theme list:** `ls ~/.tmux/plugins/tmux-tokyo-night/src/themes/`
 
----
-
-## Color Schemes
-
-### Current: Catppuccin Theme (ACTIVE)
-
-The configuration uses **Catppuccin Mocha** theme via TPM plugin.
-
-#### Theme Variants
-
-Edit `~/.tmux.conf` and change the flavor:
-
-```bash
-set -g @catppuccin_flavor 'mocha'      # Dark with warm tones (CURRENT)
-set -g @catppuccin_flavor 'frappe'     # Dark with cool tones
-set -g @catppuccin_flavor 'macchiato'  # Medium dark
-set -g @catppuccin_flavor 'latte'      # Light theme
-```
-
-After changing, reload config: `Ctrl-a r`
-
-#### Catppuccin Customization
-
-Current configuration in `~/.tmux.conf`:
-
-```bash
-# Status modules
-set -g @catppuccin_status_modules_right "directory date_time"
-set -g @catppuccin_status_modules_left "session"
-
-# Window appearance
-set -g @catppuccin_window_current_text "#W#{?window_zoomed_flag,(),}"
-set -g @catppuccin_window_default_text "#W"
-
-# Directory and time format
-set -g @catppuccin_directory_text "#{b:pane_current_path}"
-set -g @catppuccin_date_time_text "%H:%M"
-```
-
-**To disable Catppuccin and use custom colors:**
-1. Comment out `set -g @plugin 'catppuccin/tmux'` in `~/.tmux.conf`
-2. Uncomment the custom visual settings section
-3. Reload: `Ctrl-a r` and run `Ctrl-a U`
-
----
-
-### Alternative Themes (Disabled)
-
-To use these, disable Catppuccin first.
-
-### Minimal Dark Theme
-
-```bash
-# Status bar
-set -g status-style 'bg=#1e1e1e fg=#d4d4d4'
-set -g status-left ''
-set -g status-right '%H:%M '
-set -g status-right-length 50
-
-# Window status
-setw -g window-status-current-style 'bg=#007acc fg=#ffffff bold'
-setw -g window-status-style 'bg=#1e1e1e fg=#d4d4d4'
-
-# Panes
-set -g pane-border-style 'fg=#444444'
-set -g pane-active-border-style 'fg=#007acc'
-```
-
-### Gruvbox Theme
-
-```bash
-# Status bar
-set -g status-style 'bg=#3c3836 fg=#ebdbb2'
-
-# Window status
-setw -g window-status-current-style 'bg=#fb4934 fg=#282828 bold'
-setw -g window-status-style 'bg=#3c3836 fg=#ebdbb2'
-
-# Panes
-set -g pane-border-style 'fg=#504945'
-set -g pane-active-border-style 'fg=#fe8019'
-```
-
-### Nord Theme
-
-```bash
-# Status bar
-set -g status-style 'bg=#2e3440 fg=#d8dee9'
-
-# Window status
-setw -g window-status-current-style 'bg=#88c0d0 fg=#2e3440 bold'
-setw -g window-status-style 'bg=#2e3440 fg=#d8dee9'
-
-# Panes
-set -g pane-border-style 'fg=#3b4252'
-set -g pane-active-border-style 'fg=#88c0d0'
-```
-
-### Dracula Theme
-
-```bash
-# Status bar
-set -g status-style 'bg=#282a36 fg=#f8f8f2'
-
-# Window status
-setw -g window-status-current-style 'bg=#bd93f9 fg=#282a36 bold'
-setw -g window-status-style 'bg=#282a36 fg=#f8f8f2'
-
-# Panes
-set -g pane-border-style 'fg=#44475a'
-set -g pane-active-border-style 'fg=#bd93f9'
-```
+After changing, reload: `Ctrl-a r`
 
 ---
 
 ## Status Bar Customization
 
-### Information Display
+### Plugin Selection
+
+Edit line 86 in `~/.tmux.conf`:
 
 ```bash
-# Left side
-set -g status-left-length 50
-set -g status-left '#[fg=green]#H #[fg=yellow]#S #[default]'
+# Current plugins
+set -g @powerkit_plugins "git,cpu,memory,battery,datetime"
 
-# Right side
-set -g status-right-length 80
-set -g status-right '#[fg=cyan]#(whoami)@#H #[fg=yellow]%Y-%m-%d %H:%M'
+# All available plugins:
+set -g @powerkit_plugins "git,cpu,memory,battery,datetime,hostname,network,weather"
 ```
 
-### Dynamic Information
+**Plugin Details:**
+
+| Plugin | Description | Useful For |
+|--------|-------------|------------|
+| `git` | Git branch and status | Developers |
+| `cpu` | CPU usage % | Monitoring performance |
+| `memory` | RAM usage | System resource tracking |
+| `battery` | Battery level | Laptops |
+| `datetime` | Current time/date | Always useful |
+| `hostname` | Machine name | Multi-server work |
+| `network` | Network status | Connection monitoring |
+| `weather` | Current weather | Nice-to-have |
+
+### Status Bar Position
 
 ```bash
-# CPU usage
-set -g status-right '#(cat /proc/loadavg | cut -d " " -f 1-3) %H:%M'
+# Bottom (CURRENT)
+set -g @powerkit_status_position "bottom"
 
-# Battery (for laptops)
-set -g status-right 'Battery: #(acpi | cut -d, -f2) %H:%M'
-
-# Git branch (in current pane's directory)
-set -g status-right '#(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD 2>/dev/null)'
-
-# Memory usage
-set -g status-right 'MEM: #(free | grep Mem | awk "{printf \\"%.0f%%\\", \$3/\$2 * 100.0}")'
+# Top
+set -g @powerkit_status_position "top"
 ```
 
-### Conditional Formatting
+### Status Bar Layout
 
 ```bash
-# Show prefix indicator
-set -g status-right '#{?client_prefix,#[bg=red]PREFIX,} %H:%M'
+# Single line (CURRENT)
+set -g @powerkit_bar_layout "single"
 
-# Highlight when pane is synchronized
-set -g status-right '#{?pane_synchronized,#[bg=blue]SYNC,} %H:%M'
+# Double line (more space)
+set -g @powerkit_bar_layout "double"
 ```
+
+---
+
+## Visual Customization
+
+### Separator Styles
+
+```bash
+# Rounded (CURRENT - modern look)
+set -g @powerkit_separator_style "rounded"
+set -g @powerkit_edge_separator_style "rounded"
+
+# Normal (clean, minimal)
+set -g @powerkit_separator_style "normal"
+set -g @powerkit_edge_separator_style "normal"
+
+# Powerline (classic powerline arrows)
+set -g @powerkit_separator_style "powerline"
+set -g @powerkit_edge_separator_style "powerline"
+```
+
+### Spacing & Padding
+
+```bash
+# Element spacing (CURRENT - breathing room)
+set -g @powerkit_elements_spacing "true"
+
+# Tight spacing
+set -g @powerkit_elements_spacing "false"
+
+# Icon padding
+set -g @powerkit_icon_padding "1"    # CURRENT (balanced)
+set -g @powerkit_icon_padding "0"    # Compact
+set -g @powerkit_icon_padding "2"    # Spacious
+```
+
+### Window Indicators
+
+```bash
+# Icon-based (CURRENT - visual)
+set -g @powerkit_window_index_style "icon"
+
+# Text-based (simple)
+set -g @powerkit_window_index_style "text"
+
+# Number-based (minimal)
+set -g @powerkit_window_index_style "number"
+```
+
+---
+
+## Pane Border Customization
+
+### Border Lines
+
+```bash
+# Rounded (CURRENT - modern aesthetic)
+set -g @powerkit_pane_border_lines "rounded"
+
+# Single line (classic)
+set -g @powerkit_pane_border_lines "single"
+
+# Double line (heavy)
+set -g @powerkit_pane_border_lines "double"
+
+# Heavy line
+set -g @powerkit_pane_border_lines "heavy"
+```
+
+### Border Colors
+
+```bash
+# Unified (CURRENT - clean, consistent)
+set -g @powerkit_pane_border_unified "true"
+
+# Different colors for active/inactive
+set -g @powerkit_pane_border_unified "false"
+set -g @powerkit_active_pane_border_color "pane-border-active"
+set -g @powerkit_inactive_pane_border_color "pane-border-inactive"
+```
+
+---
+
+## Prefix Key Alternatives
+
+Change the prefix key (currently `Ctrl-a`):
+
+```bash
+# Screen-style (CURRENT)
+set -g prefix C-a
+unbind C-b
+bind-key C-a send-prefix
+
+# Ctrl-Space (no conflicts)
+set -g prefix C-Space
+unbind C-b
+bind-key C-Space send-prefix
+
+# Backtick (`)
+set -g prefix `
+unbind C-b
+bind-key ` send-prefix
+
+# Multiple prefixes
+set -g prefix C-a
+set -g prefix2 C-b
+unbind C-b
+bind-key C-a send-prefix
+bind-key C-b send-prefix -2
+```
+
+**Recommendation:** Stick with `Ctrl-a` (screen-compatible, ergonomic)
 
 ---
 
 ## Key Binding Customization
 
-### Vim-Style Copy Mode (Enhanced)
+### Enhanced Vim Copy Mode
+
+Add to `~/.tmux.conf`:
 
 ```bash
-# Use v to trigger selection
-bind -T copy-mode-vi v send-keys -X begin-selection
-
-# Use y to yank current selection
-bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-# Use r for rectangle selection
-bind -T copy-mode-vi r send-keys -X rectangle-toggle
-
-# Use V for line selection
+# Line selection
 bind -T copy-mode-vi V send-keys -X select-line
 
-# Use Ctrl-v for block selection
-bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+# Word selection
+bind -T copy-mode-vi W send-keys -X next-word-end
+
+# Incremental search
+bind -T copy-mode-vi / command-prompt -p "search down" "send -X search-forward \"%%%\""
 ```
 
-### Custom Split Bindings
+### Quick Window Switching (No Prefix)
 
 ```bash
-# Split with current path
-bind '"' split-window -v -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
-
-# Split full window
-bind _ split-window -fv -c "#{pane_current_path}"
-bind | split-window -fh -c "#{pane_current_path}"
-```
-
-### Window Management
-
-```bash
-# Quick window switching (Alt+number, no prefix)
+# Alt+number switches windows
 bind -n M-1 select-window -t 1
 bind -n M-2 select-window -t 2
 bind -n M-3 select-window -t 3
 bind -n M-4 select-window -t 4
+bind -n M-5 select-window -t 5
 
-# Shift arrow to switch windows
+# Shift+arrow switches windows
 bind -n S-Left previous-window
 bind -n S-Right next-window
 ```
 
-### Session Management
+### Full-Width Splits
 
 ```bash
-# Switch sessions with Alt+arrow (no prefix)
-bind -n M-Up switch-client -p
-bind -n M-Down switch-client -n
-
-# Quick session switcher
-bind S choose-session
+# Split entire window (not just pane)
+bind _ split-window -fv -c "#{pane_current_path}"
+bind | split-window -fh -c "#{pane_current_path}"
 ```
 
 ---
 
-## Plugin Configuration
+## Performance Tuning
 
-### Using TPM (Tmux Plugin Manager)
+### Status Bar Refresh Rate
 
 ```bash
-# Install TPM
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# 2 seconds (CURRENT - balanced)
+set -g @powerkit_status_interval "2"
 
-# Add to ~/.tmux.conf
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
+# 1 second (real-time, higher CPU)
+set -g @powerkit_status_interval "1"
 
-# Initialize (keep at bottom)
-run '~/.tmux/plugins/tpm/tpm'
-
-# Inside tmux, install plugins
-Ctrl-a I  # Install
-Ctrl-a U  # Update
-Ctrl-a alt-u  # Uninstall
+# 5 seconds (lower CPU, slower updates)
+set -g @powerkit_status_interval "5"
 ```
 
-### Currently Installed Plugins
-
-These are **ACTIVE** in your configuration:
+### Scrollback History
 
 ```bash
-# Core plugins
-set -g @plugin 'tmux-plugins/tpm'                    # Plugin manager
-set -g @plugin 'tmux-plugins/tmux-sensible'          # Better defaults
-set -g @plugin 'tmux-plugins/tmux-resurrect'         # Save/restore sessions
-set -g @plugin 'tmux-plugins/tmux-continuum'         # Auto-save sessions
-set -g @plugin 'tmux-plugins/tmux-yank'              # Better clipboard
-set -g @plugin 'christoomey/vim-tmux-navigator'      # Vim integration
-set -g @plugin 'sainnhe/tmux-fzf'                    # Fuzzy finder
-set -g @plugin 'catppuccin/tmux'                     # Beautiful theme
+# 50,000 lines (CURRENT)
+set -g history-limit 50000
+
+# 100,000 lines (heavy usage)
+set -g history-limit 100000
+
+# 10,000 lines (minimal memory)
+set -g history-limit 10000
 ```
 
-### Additional Plugins (Optional)
-
-Add these to `~/.tmux.conf` if needed:
+### Escape Time
 
 ```bash
-# Sidebar file tree
-set -g @plugin 'tmux-plugins/tmux-sidebar'
+# 10ms (CURRENT - optimal for Neovim/Vim)
+set -sg escape-time 10
 
-# Prefix highlight
-set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+# 0ms (instant, may cause issues)
+set -sg escape-time 0
 
-# CPU/RAM monitor
-set -g @plugin 'tmux-plugins/tmux-cpu'
-
-# Battery status
-set -g @plugin 'tmux-plugins/tmux-battery'
-
-# Open highlighted files/URLs
-set -g @plugin 'tmux-plugins/tmux-open'
-
-# Better session manager
-set -g @plugin 'tmux-plugins/tmux-sessionist'
+# 50ms (default tmux)
+set -sg escape-time 50
 ```
 
-After adding, press `Ctrl-a I` to install.
+---
 
-### Plugin Customization
+## Mouse Customization
 
-**Current Active Settings:**
+### Disable Mouse
 
 ```bash
-# tmux-resurrect: Save neovim sessions
-set -g @resurrect-strategy-nvim 'session'
+# Enable (CURRENT)
+set -g mouse on
+
+# Disable
+set -g mouse off
+```
+
+### Mouse Wheel Behavior
+
+```bash
+# Don't exit copy mode on mouse drag
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+# Enter copy mode on scroll up
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" \
+  "send-keys -M" \
+  "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
+```
+
+---
+
+## Session Management
+
+### Auto-Restore on Start
+
+```bash
+# Enabled (CURRENT)
+set -g @continuum-restore 'on'
+
+# Disabled (manual restore only)
+set -g @continuum-restore 'off'
+```
+
+### Auto-Save Interval
+
+```bash
+# 15 minutes (default)
+set -g @continuum-save-interval '15'
+
+# 5 minutes (frequent saves)
+set -g @continuum-save-interval '5'
+
+# 30 minutes (less frequent)
+set -g @continuum-save-interval '30'
+```
+
+### Resurrect Options
+
+```bash
+# Save pane contents (CURRENT)
 set -g @resurrect-capture-pane-contents 'on'
 
-# tmux-continuum: Auto-save every 15 minutes
-set -g @continuum-restore 'on'
-set -g @continuum-save-interval '15'
-```
+# Don't save pane contents
+set -g @resurrect-capture-pane-contents 'off'
 
-**Additional Options:**
+# Restore Neovim sessions
+set -g @resurrect-strategy-nvim 'session'
 
-```bash
-# tmux-yank: Copy to system clipboard
-set -g @yank_selection 'clipboard'
-set -g @yank_selection_mouse 'clipboard'
-
-# tmux-prefix-highlight: Show in status (if installed)
-set -g status-right '#{prefix_highlight} %a %Y-%m-%d %H:%M'
-
-# tmux-sidebar: File tree position
-set -g @sidebar-tree-position 'right'
-set -g @sidebar-tree-width '40'
-
-# tmux-cpu: Display format
-set -g @cpu_percentage_format "%3.0f%%"
+# Restore Vim sessions
+set -g @resurrect-strategy-vim 'session'
 ```
 
 ---
 
-## Advanced Features
-
-### Popup Windows
-
-```bash
-# Toggle popup terminal
-bind g display-popup -E "tmux new-session -A -s scratch"
-
-# Popup with specific command
-bind h display-popup -E "htop"
-
-# Popup file browser
-bind f display-popup -w 80% -h 80% -E "ranger"
-```
+## Advanced Customization
 
 ### Conditional Settings
 
 ```bash
-# Different settings for local vs SSH
+# Different settings for SSH
 if-shell '[ -n "$SSH_CLIENT" ]' \
   'set -g status-position top' \
   'set -g status-position bottom'
@@ -384,145 +377,87 @@ if-shell "tmux -V | awk '{exit !($2 >= 3.2)}'" \
   'set -g extended-keys on'
 ```
 
-### Window/Pane Options
+### Custom Status Bar Format
+
+Override PowerKit (advanced):
 
 ```bash
-# Rename window to running program
-setw -g automatic-rename on
-set -g automatic-rename-format '#{b:pane_current_path}'
+# Left status
+set -g status-left '#[fg=green]#H #[fg=yellow]#S #[default]'
+set -g status-left-length 50
 
-# Word separators for double-click
-setw -g word-separators ' @"=()[]{}:,.'
+# Right status
+set -g status-right '#[fg=cyan]%Y-%m-%d %H:%M'
+set -g status-right-length 80
 
-# Allow programs to change window name
-set -g allow-rename on
-
-# Pane border format
-set -g pane-border-format "#[fg=colour238]#{pane_index} #{pane_current_command}"
+# Window status
+setw -g window-status-current-format '#[bg=blue,fg=white] #I:#W '
+setw -g window-status-format ' #I:#W '
 ```
 
----
-
-## Mouse Customization
-
-```bash
-# Enable mouse
-set -g mouse on
-
-# Don't copy on mouse drag end
-unbind -T copy-mode-vi MouseDragEnd1Pane
-
-# Middle click to paste
-bind -n MouseDown2Pane run "tmux set-buffer \"$(xclip -o -sel primary)\"; tmux paste-buffer"
-
-# Scroll up to enter copy mode
-bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
-```
-
----
-
-## Session Hooks
+### Hooks
 
 Automate actions on events:
 
 ```bash
-# Auto-rename window based on current directory
-set-hook -g after-select-pane 'run-shell "tmux set-window-option -t #{session_name}:#{window_index} window-status-format \"#{b:pane_current_path}\""'
+# Auto-rename window based on current command
+set-hook -g after-select-pane 'run-shell "tmux rename-window #{pane_current_command}"'
 
 # Save session on exit
 set-hook -g session-closed 'run-shell "~/.tmux/plugins/tmux-resurrect/scripts/save.sh"'
-
-# Alert when pane exits
-set-hook -g pane-exited 'run-shell "notify-send \"Pane exited\" \"#{pane_current_command} in #{session_name}:#{window_index}\""'
 ```
 
 ---
 
-## Environment Variables
+## Plugin Management
+
+### Add New Plugins
+
+Edit `~/.tmux.conf` and add before the TPM initialization:
 
 ```bash
-# Pass through environment variables
-set -ga update-environment ' MY_VAR'
+# Add plugin
+set -g @plugin 'author/plugin-name'
 
-# Set default shell
-set -g default-shell /bin/zsh
-
-# Set default command
-set -g default-command /bin/zsh
+# Then install
+Ctrl-a I
 ```
 
----
-
-## Performance Optimization
+### Recommended Plugins
 
 ```bash
-# Faster command sequences
-set -sg escape-time 0
+# File tree sidebar
+set -g @plugin 'tmux-plugins/tmux-sidebar'
 
-# Increase repeat time for repeatable commands
-set -g repeat-time 1000
+# Enhanced prefix indicator
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
 
-# Increase history limit
-set -g history-limit 100000
+# CPU/GPU monitor
+set -g @plugin 'tmux-plugins/tmux-cpu'
 
-# Aggressive resize
-setw -g aggressive-resize on
+# Better session manager
+set -g @plugin 'tmux-plugins/tmux-sessionist'
 
-# Update status bar less frequently
-set -g status-interval 10
+# Open URLs/files from tmux
+set -g @plugin 'tmux-plugins/tmux-open'
 ```
 
----
-
-## Multi-Monitor Support
+### Remove Plugins
 
 ```bash
-# Constrain window size to smallest client actively viewing
-setw -g aggressive-resize on
+# Comment out in ~/.tmux.conf
+# set -g @plugin 'author/plugin-name'
 
-# Per-session window sizing
-set -g window-size largest
-```
-
----
-
-## Nested Tmux Configuration
-
-For working on remote servers:
-
-```bash
-# Local tmux
-bind -n C-a send-prefix
-
-# Remote tmux (toggle between local/remote)
-bind -n C-q if-shell "$is_vim" "send-keys C-q" "set -g prefix C-q; set -g status-style bg=red"
-bind C-q send-prefix \; set -g prefix C-a \; set -g status-style bg=black
-```
-
----
-
-## Testing Configuration
-
-```bash
-# Check syntax without applying
-tmux -f ~/.tmux.conf.test list-keys
-
-# Show current settings
-tmux show-options -g
-tmux show-window-options -g
-
-# List all key bindings
-tmux list-keys
-
-# Show specific option
-tmux show-options -g status-style
+# Reload and clean
+Ctrl-a r
+Ctrl-a alt-u
 ```
 
 ---
 
 ## Configuration Organization
 
-For complex configs, split into multiple files:
+For complex setups, split into files:
 
 ```bash
 # ~/.tmux.conf
@@ -531,20 +466,41 @@ source-file ~/.tmux/bindings.conf
 source-file ~/.tmux/theme.conf
 source-file ~/.tmux/plugins.conf
 
-# Load local overrides if they exist
+# Local overrides
 if-shell '[ -f ~/.tmux.local.conf ]' \
   'source-file ~/.tmux.local.conf'
 ```
 
+Create `~/.tmux/` directory and move sections accordingly.
+
 ---
 
-## Backup Your Configuration
+## Testing Changes
+
+```bash
+# Check syntax (doesn't apply changes)
+tmux -f ~/.tmux.conf.test list-keys
+
+# Show current options
+tmux show-options -g
+tmux show-window-options -g
+
+# List all key bindings
+tmux list-keys
+
+# Show specific option value
+tmux show-options -g status-style
+```
+
+---
+
+## Backup & Version Control
 
 ```bash
 # Backup
-cp ~/.tmux.conf ~/.tmux.conf.backup
+cp ~/.tmux.conf ~/.tmux.conf.backup.$(date +%Y%m%d)
 
-# Version control (recommended)
+# Git tracking (recommended)
 cd ~
 git init
 git add .tmux.conf
@@ -557,12 +513,13 @@ git commit -m "Tmux configuration"
 
 ## Resources
 
-- **Man page:** `man tmux` - Complete reference
-- **GitHub:** https://github.com/tmux/tmux
-- **Wiki:** https://github.com/tmux/tmux/wiki
+- **PowerKit Docs:** https://github.com/fabioluciano/tmux-powerkit/wiki
+- **PowerKit Themes:** `ls ~/.tmux/plugins/tmux-tokyo-night/src/themes/`
+- **PowerKit Plugins:** https://github.com/fabioluciano/tmux-powerkit/wiki/Plugins
+- **Tmux Man Page:** `man tmux`
 - **Awesome Tmux:** https://github.com/rothgar/awesome-tmux
-- **My config examples:** https://github.com/search?q=tmux.conf
+- **TPM:** https://github.com/tmux-plugins/tpm
 
 ---
 
-**Tip:** Start with the provided config and gradually add customizations as you discover your workflow preferences. Too many changes at once can be overwhelming!
+**Pro Tip:** Make incremental changes and test each one. Keep a backup before major modifications. The current configuration is already optimized for aesthetics and productivity - only customize what doesn't fit your workflow.

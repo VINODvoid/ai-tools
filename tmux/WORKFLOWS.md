@@ -2,68 +2,81 @@
 
 Practical workflows and real-world scenarios for maximizing tmux productivity.
 
+**Prefix:** `Ctrl-a`
+
 ---
 
 ## Development Workflows
 
 ### 1. Full Stack Development
 
-**Setup:**
-```bash
-tmux new -s fullstack
-```
+**Goal:** Edit code, run frontend, run backend, monitor git - all in one view.
 
 **Layout:**
 ```
-┌─────────────────┬─────────────────┐
-│                 │   Git/Shell     │
-│    Editor       ├─────────────────┤
-│   (nvim/code)   │   Backend       │
-│                 ├─────────────────┤
-│                 │   Frontend      │
-└─────────────────┴─────────────────┘
+┌──────────────┬──────────────┐
+│              │  Git/Shell   │
+│   Editor     ├──────────────┤
+│  (Neovim)    │   Backend    │
+│              ├──────────────┤
+│              │   Frontend   │
+└──────────────┴──────────────┘
 ```
 
-**Commands:**
+**Setup:**
 ```bash
-# Start
 tmux new -s fullstack
-Ctrl-a |           # Split vertical
-Ctrl-a l           # Move to right
-Ctrl-a -           # Split horizontal
-Ctrl-a -           # Split horizontal again
+# Split vertical: Ctrl-a |
+# Move right: Ctrl-a l
+# Split horizontal: Ctrl-a -
+# Split horizontal again: Ctrl-a -
+# Move to top-right: Ctrl-a k (twice)
 
-# Run services
-# Right top: git status
-# Right middle: npm run backend
-# Right bottom: npm run frontend
+# Now run:
+# Left: nvim
+# Top right: git status
+# Middle right: npm run backend
+# Bottom right: npm run dev
+```
+
+**Quick Script:**
+```bash
+#!/bin/bash
+tmux new-session -d -s fullstack
+tmux split-window -h
+tmux split-window -v
+tmux split-window -v
+tmux select-pane -t 0
+tmux send-keys -t 0 'nvim' C-m
+tmux send-keys -t 2 'npm run backend' C-m
+tmux send-keys -t 3 'npm run dev' C-m
+tmux attach -t fullstack
 ```
 
 ---
 
 ### 2. Single Project Focus
 
-**Setup:**
-```bash
-tmux new -s myproject
-```
+**Goal:** Simple editor + tests + server setup.
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│         Editor                  │
-│                                 │
-├─────────────────────────────────┤
-│    Tests      │      Server     │
-└─────────────────────────────────┘
+┌──────────────────────────────┐
+│         Editor               │
+│                              │
+├──────────────┬───────────────┤
+│  Tests       │    Server     │
+└──────────────┴───────────────┘
 ```
 
-**Commands:**
+**Setup:**
 ```bash
+tmux new -s myproject
 Ctrl-a -           # Split horizontal
 Ctrl-a j           # Move down
 Ctrl-a |           # Split vertical
-# Top: editor
+Ctrl-a h           # Back to left pane
+# Top: editor (nvim)
 # Bottom left: npm test -- --watch
 # Bottom right: npm start
 ```
@@ -72,12 +85,10 @@ Ctrl-a |           # Split vertical
 
 ### 3. Microservices Development
 
-**Setup:** One window per service
+**Goal:** One window per service, easy switching.
 
-```bash
-tmux new -s microservices
-
-# Window layout
+**Windows:**
+```
 0: auth-service
 1: api-gateway
 2: user-service
@@ -85,30 +96,44 @@ tmux new -s microservices
 4: database
 ```
 
-**Commands:**
-```bash
-Ctrl-a c           # Create new window for each service
-Ctrl-a ,           # Rename each window
-
-# In each window, split as needed
-Ctrl-a -           # Code on top, logs on bottom
-```
-
-**Quick script:**
+**Automation Script:**
 ```bash
 #!/bin/bash
-tmux new-session -d -s micro
-tmux rename-window -t micro:0 'auth'
-tmux send-keys -t micro:0 'cd ~/services/auth && npm start' C-m
+# ~/bin/start-microservices
 
-tmux new-window -t micro:1 -n 'api'
-tmux send-keys -t micro:1 'cd ~/services/api && npm start' C-m
+SESSION="micro"
 
-tmux new-window -t micro:2 -n 'user'
-tmux send-keys -t micro:2 'cd ~/services/user && npm start' C-m
+tmux new-session -d -s $SESSION
 
-tmux new-window -t micro:3 -n 'logs'
-tmux attach -t micro
+# Auth service
+tmux rename-window -t $SESSION:0 'auth'
+tmux send-keys -t $SESSION:0 'cd ~/services/auth && npm start' C-m
+
+# API Gateway
+tmux new-window -t $SESSION:1 -n 'api'
+tmux send-keys -t $SESSION:1 'cd ~/services/api && npm start' C-m
+
+# User service
+tmux new-window -t $SESSION:2 -n 'user'
+tmux send-keys -t $SESSION:2 'cd ~/services/user && npm start' C-m
+
+# Logs viewer
+tmux new-window -t $SESSION:3 -n 'logs'
+tmux send-keys -t $SESSION:3 'tail -f ~/logs/*.log' C-m
+
+# Database
+tmux new-window -t $SESSION:4 -n 'db'
+tmux send-keys -t $SESSION:4 'psql -d mydb' C-m
+
+# Attach to session
+tmux select-window -t $SESSION:0
+tmux attach -t $SESSION
+```
+
+**Usage:**
+```bash
+chmod +x ~/bin/start-microservices
+start-microservices
 ```
 
 ---
@@ -126,52 +151,120 @@ tmux attach -t micro
 └────────────────────────────────┘
 ```
 
-**Commands:**
+**Setup:**
 ```bash
 tmux new -s monitor
 
-# Top row
+# Top row - monitoring tools
 htop
 Ctrl-a |
 tail -f /var/log/syslog
 Ctrl-a |
 nethogs
 
-# Bottom
-Ctrl-a -
-# Regular shell for commands
+# Bottom row - command shell
+Ctrl-a h           # Move to first pane
+Ctrl-a -           # Split below
 ```
 
 ---
 
 ### 2. Multi-Server Management
 
-**Setup:** One window per server
+**Goal:** SSH into multiple servers, one window per server.
 
-```bash
-tmux new -s servers
-
-# Windows
-0: web-1
-1: web-2
-2: db-1
-3: cache
-```
-
-**Auto-connect script:**
+**Script:**
 ```bash
 #!/bin/bash
-tmux new-session -d -s servers
-tmux rename-window -t servers:0 'web-1'
-tmux send-keys -t servers:0 'ssh web-1' C-m
+# ~/bin/connect-servers
 
-tmux new-window -t servers:1 -n 'web-2'
-tmux send-keys -t servers:1 'ssh web-2' C-m
+SESSION="servers"
 
-tmux new-window -t servers:2 -n 'db-1'
-tmux send-keys -t servers:2 'ssh db-1' C-m
+tmux new-session -d -s $SESSION
+tmux rename-window -t $SESSION:0 'web-1'
+tmux send-keys -t $SESSION:0 'ssh web-1' C-m
 
-tmux attach -t servers
+tmux new-window -t $SESSION:1 -n 'web-2'
+tmux send-keys -t $SESSION:1 'ssh web-2' C-m
+
+tmux new-window -t $SESSION:2 -n 'db-1'
+tmux send-keys -t $SESSION:2 'ssh db-1' C-m
+
+tmux new-window -t $SESSION:3 -n 'cache'
+tmux send-keys -t $SESSION:3 'ssh cache-1' C-m
+
+tmux attach -t $SESSION
+```
+
+**Usage:**
+```bash
+# Quick switch between servers
+Ctrl-a 0    # web-1
+Ctrl-a 1    # web-2
+Ctrl-a 2    # db-1
+Ctrl-a 3    # cache
+
+# Or use window list
+Ctrl-a w
+```
+
+---
+
+## Remote Work Workflows
+
+### 1. Persistent Remote Sessions
+
+**Problem:** SSH connection drops, lose all work.
+**Solution:** Tmux sessions persist!
+
+```bash
+# Initial connection
+ssh user@server
+tmux new -s work
+
+# Do your work...
+# Connection drops!
+
+# Later, reconnect
+ssh user@server
+tmux attach -t work
+# Everything is exactly as you left it!
+```
+
+**Pro Tip:** Always start tmux immediately after SSHing.
+
+---
+
+### 2. Pair Programming
+
+**Traditional Approach (Same Server):**
+```bash
+# Person 1 creates session
+tmux new -s pair
+
+# Person 2 SSH's in and joins
+ssh user@host
+tmux attach -t pair
+
+# Both see and control the same session
+```
+
+**Modern Approach (tmate):**
+```bash
+# Install tmate (tmux for sharing)
+# https://tmate.io/
+
+# Person 1
+tmate new -s pair
+
+# Get shareable link
+tmate show-messages
+# Outputs: ssh session link
+
+# Person 2 uses the link
+ssh <tmate-link>
+
+# No SSH access needed!
 ```
 
 ---
@@ -182,91 +275,49 @@ tmux attach -t servers
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│     Jupyter/IPython             │
-├─────────────────┬───────────────┤
-│   Editor        │   Visualizer  │
-└─────────────────┴───────────────┘
+┌─────────────────────────────┐
+│   Jupyter Notebook          │
+├──────────────┬──────────────┤
+│  Editor      │  Visualizer  │
+└──────────────┴──────────────┘
 ```
-
-**Commands:**
-```bash
-tmux new -s analysis
-jupyter notebook
-Ctrl-a -
-Ctrl-a |
-# Left: edit scripts
-# Right: run visualizations
-```
-
----
-
-### 2. ML Training
-
-**Layout:**
-```
-┌──────────────┬──────────────────┐
-│   Jupyter    │   GPU Monitor    │
-├──────────────┤                  │
-│   TensorBoard│                  │
-└──────────────┴──────────────────┘
-```
-
-**Commands:**
-```bash
-tmux new -s ml
-jupyter lab
-Ctrl-a |
-watch -n 1 nvidia-smi
-Ctrl-a h
-Ctrl-a -
-tensorboard --logdir=./logs
-```
-
----
-
-## Remote Work Workflows
-
-### 1. Persistent Remote Session
-
-**Use case:** SSH connection drops but work continues
-
-```bash
-# On remote server
-ssh user@server
-tmux new -s work
-
-# Do your work...
-# Connection drops!
-
-# Reconnect
-ssh user@server
-tmux attach -t work
-# Everything is still there!
-```
-
----
-
-### 2. Pair Programming
 
 **Setup:**
 ```bash
-# Person 1 (host)
-tmux new -s pair
-# Share SSH access or use tmate
-
-# Person 2
-ssh user@host
-tmux attach -t pair
+tmux new -s analysis
+jupyter notebook --no-browser
+Ctrl-a -
+Ctrl-a |
+# Top: Jupyter (access via browser)
+# Bottom left: Edit scripts (nvim)
+# Bottom right: Run visualizations (python)
 ```
 
-**With tmate (easier sharing):**
+---
+
+### 2. Machine Learning Training
+
+**Layout:**
+```
+┌──────────────┬──────────────┐
+│  Jupyter     │ GPU Monitor  │
+├──────────────┤              │
+│ TensorBoard  │              │
+└──────────────┴──────────────┘
+```
+
+**Setup:**
 ```bash
-# Install tmate (tmux fork for sharing)
-tmate new -s pair
-# Get share link
-tmate show-messages
-# Share link with pair
+tmux new -s ml
+
+# Left side
+jupyter lab --no-browser
+Ctrl-a -
+tensorboard --logdir=./logs
+
+# Right side
+Ctrl-a |
+watch -n 1 nvidia-smi
 ```
 
 ---
@@ -277,20 +328,20 @@ tmate show-messages
 
 **Layout:**
 ```
-┌─────────────────┬───────────────┐
-│                 │               │
-│   Editor        │   Preview     │
-│   (markdown)    │   (browser)   │
-│                 │               │
-└─────────────────┴───────────────┘
+┌─────────────────┬──────────────┐
+│                 │              │
+│   Editor        │  Preview     │
+│  (Markdown)     │  (Browser)   │
+│                 │              │
+└─────────────────┴──────────────┘
 ```
 
-**Commands:**
+**Setup:**
 ```bash
 tmux new -s docs
 nvim README.md
 Ctrl-a |
-# Use live markdown preview server
+# Start preview server
 npx live-server --port=8080
 ```
 
@@ -300,74 +351,85 @@ npx live-server --port=8080
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│         Editor                  │
-├─────────────────┬───────────────┤
-│   Hugo Server   │   Git Status  │
-└─────────────────┴───────────────┘
+┌─────────────────────────────┐
+│         Editor              │
+├──────────────┬──────────────┤
+│ Hugo Server  │  Git Status  │
+└──────────────┴──────────────┘
+```
+
+**Setup:**
+```bash
+tmux new -s blog
+nvim content/posts/new-post.md
+Ctrl-a -
+hugo server
+Ctrl-a |
+watch -n 5 git status --short
 ```
 
 ---
 
-## Custom Session Scripts
+## Session Management Scripts
 
-### Development Session Script
+### Recommended Script Structure
 
-Save as `~/bin/dev-session`:
+Save as `~/bin/dev`:
 
 ```bash
 #!/bin/bash
-SESSION="dev"
+# Quick development session launcher
+
+SESSION=${1:-dev}
+PROJECT_DIR=${2:-~/projects}
 
 # Check if session exists
 tmux has-session -t $SESSION 2>/dev/null
 
 if [ $? != 0 ]; then
   # Create new session
+  cd "$PROJECT_DIR"
+
   tmux new-session -d -s $SESSION -n editor
+  tmux send-keys -t $SESSION:0 "cd $PROJECT_DIR && nvim" C-m
 
-  # Window 0: Editor
-  tmux send-keys -t $SESSION:0 'cd ~/projects && nvim' C-m
+  tmux new-window -t $SESSION:1 -n shell
+  tmux send-keys -t $SESSION:1 "cd $PROJECT_DIR" C-m
 
-  # Window 1: Server
-  tmux new-window -t $SESSION:1 -n server
-  tmux send-keys -t $SESSION:1 'cd ~/projects' C-m
-
-  # Window 2: Git
   tmux new-window -t $SESSION:2 -n git
-  tmux send-keys -t $SESSION:2 'cd ~/projects && git status' C-m
+  tmux send-keys -t $SESSION:2 "cd $PROJECT_DIR && git status" C-m
 
-  # Window 3: Logs
-  tmux new-window -t $SESSION:3 -n logs
-
-  # Select first window
   tmux select-window -t $SESSION:0
 fi
 
-# Attach to session
 tmux attach -t $SESSION
 ```
 
-Make it executable:
+**Usage:**
 ```bash
-chmod +x ~/bin/dev-session
-dev-session  # Run it
+chmod +x ~/bin/dev
+
+# Start default dev session
+dev
+
+# Start custom session
+dev myproject ~/code/myproject
 ```
 
 ---
 
-### Multi-Project Manager
+### Project Switcher
 
-Save as `~/bin/project-switch`:
+Save as `~/bin/proj`:
 
 ```bash
 #!/bin/bash
-# Select project and launch tmux session
+# Interactive project selector
 
 PROJECTS=(
   "~/work/project-a"
   "~/work/project-b"
-  "~/personal/project-c"
+  "~/personal/blog"
 )
 
 echo "Select project:"
@@ -379,7 +441,7 @@ select PROJECT in "${PROJECTS[@]}"; do
     tmux has-session -t $SESSION 2>/dev/null
     if [ $? != 0 ]; then
       tmux new-session -d -s $SESSION
-      tmux send-keys -t $SESSION "cd $PROJECT" C-m
+      tmux send-keys -t $SESSION "cd $PROJECT && nvim" C-m
     fi
 
     tmux attach -t $SESSION
@@ -388,100 +450,51 @@ select PROJECT in "${PROJECTS[@]}"; do
 done
 ```
 
----
-
-## Modern Features Integration
-
-### 1. Popup Windows (NEW!)
-
-Quick access to git, terminals, and tools:
-
+**Usage:**
 ```bash
-# Git status popup (90% screen)
-Ctrl-a g
-
-# Generic popup terminal
-Ctrl-a G
-
-# Custom popup commands (add to config)
-bind h display-popup -E -w 80% -h 80% "htop"
-bind f display-popup -E -w 80% -h 80% "ranger"
-```
-
-**Use cases:**
-- Quick git status without switching panes
-- Temporary calculator or quick command
-- File browsing overlay
-
----
-
-### 2. Session Persistence (AUTO!)
-
-Your sessions now **auto-save every 15 minutes** and restore on tmux restart!
-
-```bash
-# Manual save
-Ctrl-a Ctrl-s
-
-# Manual restore (after reboot)
-Ctrl-a Ctrl-r
-
-# Check last save time
-tmux show-option -gv @continuum-save-interval
-```
-
-**Benefits:**
-- Survive system reboots
-- Restore entire workspace instantly
-- Never lose your session layout
-- Pane contents are preserved!
-
----
-
-### 3. Fuzzy Finding
-
-Use tmux-fzf for quick navigation:
-
-```bash
-# Open fuzzy finder
-Ctrl-a f
-
-# Then select:
-# - Sessions
-# - Windows
-# - Panes
-# - Commands
+chmod +x ~/bin/proj
+proj
+# Select from menu
 ```
 
 ---
 
-## Advanced Tips
+## Advanced Techniques
 
-### 1. Synchronized Panes
+### 1. Pane Synchronization
 
-Run same command in all panes:
+**Use Case:** Run the same command on multiple servers.
 
 ```bash
+# Setup: One pane per server
+ssh web-1
+Ctrl-a |
+ssh web-2
+Ctrl-a |
+ssh web-3
+
+# Enable synchronization
 Ctrl-a : setw synchronize-panes on
 
-# Now type appears in all panes
-# Useful for multi-server management
+# Now typing appears in all panes!
+sudo systemctl restart nginx
 
+# Disable synchronization
 Ctrl-a : setw synchronize-panes off
 ```
 
 ---
 
-### 2. Session Nesting
+### 2. Session Nesting (Remote + Local)
 
-Working on remote server that also uses tmux:
+**Scenario:** Local tmux, SSH to server also running tmux.
 
 ```bash
-# Local: Ctrl-a (commands go to local tmux)
-# Remote: Ctrl-a Ctrl-a (send prefix to remote)
+# Local command: Ctrl-a <key>
+# Remote command: Ctrl-a Ctrl-a <key>
 
-# Example
-Ctrl-a Ctrl-a c  # Create window in remote tmux
+# Example: Create window on remote
+Ctrl-a Ctrl-a c
 ```
 
 ---
@@ -490,8 +503,8 @@ Ctrl-a Ctrl-a c  # Create window in remote tmux
 
 ```bash
 # In pane 1
-Ctrl-a Escape    # Copy mode
-# Select text with v and y
+Ctrl-a [         # Enter copy mode
+# Navigate and select with v, copy with y
 
 # Switch to pane 2
 Ctrl-a l
@@ -502,71 +515,104 @@ Ctrl-a p
 
 ---
 
-### 4. Command History Per Pane
+## Session Persistence
 
-Each pane maintains independent shell history!
+With **tmux-resurrect** and **tmux-continuum**, sessions auto-save and restore!
 
----
+### Auto-Save
 
-### 5. Automatic Session Saving
+Sessions save every 15 minutes automatically.
 
-With tmux-resurrect plugin:
+### Manual Operations
 
 ```bash
-# Save session
+# Save session manually
 Ctrl-a Ctrl-s
 
-# Restore session (after reboot)
+# After reboot, restore
 Ctrl-a Ctrl-r
+
+# Or auto-restore on tmux start (already enabled)
 ```
+
+**What Gets Saved:**
+- Window layouts
+- Pane arrangements
+- Working directories
+- Pane contents (scrollback)
+- Running programs
 
 ---
 
 ## Workflow Templates
 
-### Template: Rapid Prototyping
-
-```bash
-tmux new -s proto
-# Split into 4 panes (Ctrl-a ", Ctrl-a %)
-# 1: Editor
-# 2: File watcher (nodemon, etc)
-# 3: Browser automation (playwright)
-# 4: Notes/documentation
-```
-
 ### Template: Bug Investigation
 
 ```bash
-tmux new -s debug
-# Window 0: Code editor
-# Window 1: Running app with logs
-# Window 2: Git bisect/history
-# Window 3: Stack Overflow/docs in w3m
+#!/bin/bash
+tmux new-session -d -s debug
+tmux rename-window -t debug:0 'code'
+tmux new-window -t debug:1 -n 'logs'
+tmux new-window -t debug:2 -n 'git'
+tmux new-window -t debug:3 -n 'docs'
+tmux attach -t debug
 ```
 
 ### Template: Learning New Tech
 
 ```bash
-tmux new -s learn
-# Window 0: Tutorial/documentation
-# Window 1: Practice code
-# Window 2: REPL/playground
-# Window 3: Notes
+#!/bin/bash
+tmux new-session -d -s learn
+tmux rename-window -t learn:0 'tutorial'
+tmux new-window -t learn:1 -n 'practice'
+tmux new-window -t learn:2 -n 'repl'
+tmux new-window -t learn:3 -n 'notes'
+tmux attach -t learn
 ```
 
 ---
 
 ## Productivity Tips
 
-1. **One session per project** - Quickly switch contexts
-2. **Descriptive names** - Know what's running
-3. **Consistent layouts** - Muscle memory
-4. **Script repetitive setups** - Save time
-5. **Use session groups** - Share windows between sessions
-6. **Detach liberally** - tmux persists everything
-7. **Kill unused sessions** - Keep it clean
+1. **One Session Per Project** - Maintain separate contexts, quick switching
+2. **Descriptive Names** - `tmux new -s myproject` not `tmux`
+3. **Consistent Layouts** - Muscle memory makes you faster
+4. **Script Common Setups** - Automate repetitive layouts
+5. **Detach Liberally** - `Ctrl-a d` - sessions persist forever
+6. **Clean Up Unused** - `tmux kill-session -t old` - keep it tidy
+7. **Use Window Numbers** - `Ctrl-a 0-9` for instant access
 
 ---
 
-**Pro Tip:** Create your most common workflow as a script and alias it. Mine is `dev` which launches my full development environment in seconds!
+## Real-World Example
+
+My daily development workflow:
+
+```bash
+# Morning: Start project sessions
+~/bin/dev backend ~/code/backend
+Ctrl-a d
+
+~/bin/dev frontend ~/code/frontend
+Ctrl-a d
+
+~/bin/dev docs ~/code/docs
+Ctrl-a d
+
+# Work throughout the day, switching contexts
+tmux attach -t backend    # Focus on API
+Ctrl-a d
+tmux attach -t frontend   # Build UI
+Ctrl-a d
+
+# Evening: Detach everything
+tmux ls                   # See all sessions
+Ctrl-a d                  # Close terminal
+
+# Next day: Resume exactly where I left off
+tmux attach -t backend    # Right back to work
+```
+
+---
+
+**Pro Tip:** Create a morning script that launches all your common sessions. Mine starts 5 tmux sessions (work projects, personal projects, monitoring) with one command. Takes 2 seconds, saves 5 minutes of setup every day!
